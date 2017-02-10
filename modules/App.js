@@ -10,7 +10,7 @@ const articles = [
 				title: '10 Reasons Why Bank of Baroda Sucks',
 				body: 'He came in promising to be an unconventional president, and on that score',
 				date: new Date(),
-				entities: [{name: 'Bank of Baroda', sentiment: -1}]
+				entities: [{name: 'Bank of Baroda', sentiment: -1}, {name: 'Paytm', sentiment: 2}]
 			},
 			{
 				id: '388e452a-eb83-7227-02f1-4ae48a304a36',

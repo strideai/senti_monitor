@@ -5,18 +5,32 @@ import Article from './article/Article'
 import { Router, Route, hashHistory } from 'react-router'
 import update from 'immutability-helper'
 import Nav from './Nav'
+import FilterBar from './feedFilter/FilterBar'
+const Constant = require('./constants')
 
 class Home extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			selectedEntities: []
+			selectedEntities: [],
+			sortBy: Constant.sortOptions.DATE
 		}
 		this.handleChangeSelectedEntities = this.handleChangeSelectedEntities.bind(this)
+		this.handleChoice = this.handleChoice.bind(this)
+		this.selectedIndexOf = this.selectedIndexOf.bind(this)
+	}
+
+	selectedIndexOf(entity) {
+		var selected = this.state.selectedEntities
+		for (var i = 0; i < selected.length; i++) {
+			if (selected[i].name == entity.name)
+				return i
+		}
+		return -1
 	}
 
 	handleChangeSelectedEntities(entity) {
-		var index = this.state.selectedEntities.indexOf(entity)
+		var index = this.selectedIndexOf(entity)
 		if (index != -1) {
 			this.setState({selectedEntities: update(this.state.selectedEntities, {$splice: [[index, 1]]})})
 		} else {
@@ -24,15 +38,21 @@ class Home extends React.Component {
 		}
 	}
 
+	handleChoice(sortBy) {
+		this.setState({sortBy: sortBy})
+	}
+
 	render() {
 		var articles = this.props.routes[0].articles
+		var handleChoice = this.handleChoice
 		return (
 			<div>
 			<Nav />
+			<FilterBar handleChoice={handleChoice} />
 			<div className='container'>
 			<div className='row'>
 			<div className='col-sm-9'>
-				<Feed selectedEntities={this.state.selectedEntities} articles={articles} />
+				<Feed selectedIndexOf={this.selectedIndexOf} sortBy={this.state.sortBy} selectedEntities={this.state.selectedEntities} articles={articles} />
 			</div>
 			<div className='col-sm-3 entity-list-col'>
 				<Entities handleChangeSelectedEntities={this.handleChangeSelectedEntities} selectedEntities={this.state.selectedEntities}/>

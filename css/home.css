@@ -19,6 +19,8 @@ body {
 .navbar {
 	background-color: #455a64;
 	padding: 20px;
+	margin-bottom: 0;
+	z-index: 10;
 }
 .badge {
 	margin: 0 5px;
@@ -112,10 +114,33 @@ input[type="search"] {
 	font-family: 'Slabo 27px', serif;
 }
 div.container {
-	margin-top: 10px;
 }
 .article-list-item {
 	max-width: 650px;
 	margin: 10px 30px 10px;
 	padding: 10px;
+}
+
+.filter-bar {
+	border-bottom: 1px solid #ccc;
+	box-shadow: 0 0 10px #ddd;
+    -webkit-box-shadow: 0 0 10px #ddd;
+    -moz-box-shadow: 0 0 10px #ddd;
+    z-index: 1;
+    margin-bottom: 10px;
+    padding: 5px 2px 5px 2px;
+}
+
+.filter-bar-filter {
+	height: 25px;
+}
+
+.sort-by {
+	margin-right: 10px;
+	font-size: 13px;
+}
+
+.filter-option {
+	width: 100px;
+	font-size: 13px;
 }
