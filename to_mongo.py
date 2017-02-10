@@ -5,7 +5,7 @@ conn.admin.authenticate('username', 'password')
 db = conn.news
 collection = db.business
 
-files = ['200','100','400','500','600','700','800','900','1000','1100','1200','1300','1400']
+files = ['200','300','400','500','600','700','800','900','1000','1100','1200','1300','1400']
 
 for file_no in files:
 	with open('biz_Data'+file_no +'.json','r') as f:
