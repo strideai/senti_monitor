@@ -7,14 +7,9 @@ import pymongo,json
 
 
 conn = pymongo.MongoClient('localhost',27017)              # Mongo Stuff
-conn.admin.authenticate('root', 'themenwhopause')
+conn.admin.authenticate('USERNAME', 'PASSWORD')
 db = conn.news
 collection = db.business
-
-class EchoService(pyrestful.rest.RestHandler):
-	@get(_path="/echo/{name}", _produces=mediatypes.APPLICATION_JSON)
-	def sayHello(self, name):
-		return {"Hello":name}
 
 class entity(pyrestful.rest.RestHandler):
 	@get(_path="/entity/{name}", _produces=mediatypes.APPLICATION_JSON)
@@ -24,8 +19,7 @@ class entity(pyrestful.rest.RestHandler):
 
 	@get(_path="/entity", _produces=mediatypes.APPLICATION_JSON)
 	def say(self):
-		#print(self.get_argument("q"))
-		#try:
+		try:
 			limit = self.get_argument("limit")
 			offset = self.get_argument("offset")
 			limit = eval(limit)
@@ -44,17 +38,16 @@ class entity(pyrestful.rest.RestHandler):
 				#val.pop('Entities')
 				#val.pop('Subject_sentiment')
 				json_list.append(val)
-			return json_list#json.dumps([dict(j) for j in json_list])
+			return json_list
 
-		#except:
-			#pass	
-		#return {"Hello":"name"}
+		except:
+			return {"Error":"ERROR"}
 
 
 if __name__ == '__main__':
 			try:
-					 print("Start the echo service")
-					 app = pyrestful.rest.RestService([EchoService,entity])
+					 print("running on 8000")
+					 app = pyrestful.rest.RestService([entity])
 					 app.listen(8000)
 					 #tornado.ioloop.IOLoop.instance().start()
 					 #logging.info("Server running on port %d", options.port)
