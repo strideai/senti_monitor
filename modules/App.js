@@ -1,15 +1,10 @@
 import React from 'react'
-import Feed from './Feed'
-import Nav from './Nav'
-import Entities from './Entities'
-import Article from './Article'
 import { Router, Route, hashHistory } from 'react-router'
-import update from 'immutability-helper'
+import Home from './Home'
+import Nav from './Nav'
+import Article from './article/Article'
 
-class App extends React.Component {
-	constructor(props) {
-		super(props)
-		this.articles = [
+const articles = [
 			{
 				id: 'be0d4e0b-65de-decd-5a82-62aff150c2f7',
 				title: '10 Reasons Why Bank of Baroda Sucks',
@@ -32,32 +27,16 @@ class App extends React.Component {
 				entities: [{name: 'Paytm', sentiment: -3}, {name: 'Freecharge', sentiment: 2}, {name: 'MobiKwik', sentiment: 2}]
 			}
 		]
-		this.state = {
-			selectedEntities: []
-		}
-	}
 
-	handleChangeSelectedEntities(entity) {
-		this.state.selectedEntities = entities
-	}
-
+class App extends React.Component {
 	render() {
 		return (
 			<div>
-			<Nav />
-			<div className='container'>
-			<div className='row'>
-			<div className='col-sm-9'>
-				<Router history={hashHistory}>
-					<Route path="/" component={() => (<Feed selectedEntities={this.state.selectedEntities} articles={this.articles} />)} />
-					<Route path="/:articleId" component={() => (<Article articles={this.articles} />)} />
-				</Router>
-			</div>
-			<div className='col-sm-3 entity-list-col'>
-				<Entities handleChangeSelectedEntities={this.handleChangeSelectedEntities} selectedEntities={this.state.selectedEntities}/>
-			</div>
-			</div>
-			</div>
+			
+			<Router history={hashHistory}>
+				<Route path="/" component={Home} articles={articles}/>
+				<Route path="/article/:articleId" component={Article} articles={articles}/>
+			</Router>
 			</div>
 		)
 	}

@@ -10,7 +10,7 @@ class EntityList extends React.Component {
 		var handleClick = this.props.handleClick
 		var selectedEntities = this.props.selectedEntities
 		const getEntityList = entities => entities.sort().map(
-			(e) => <EntityListItem ref={key={e.name} entity={e} selected={selectedEntities.indexOf(e) != -1} onClick={handleClick} />
+			(e) => <EntityListItem key={e.name} entity={e} selected={selectedEntities.indexOf(e) != -1} onClick={handleClick} />
 		)
 		
 		var filtered = []

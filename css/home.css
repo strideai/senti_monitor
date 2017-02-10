@@ -5,6 +5,9 @@
 	margin-left: 5px;
 	text-indent: 0;
 }
+.article-title-center {
+	text-align: center;
+}
 .article-title:hover {
 	color: #333;
 }
