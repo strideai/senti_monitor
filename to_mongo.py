@@ -1,7 +1,7 @@
 import pymongo,json
 
 conn = pymongo.MongoClient('localhost',27017)              # Mongo Stuff
-conn.admin.authenticate('root', 'themenwhopause')
+conn.admin.authenticate('username', 'password')
 db = conn.news
 collection = db.business
 
@@ -19,9 +19,9 @@ for file_no in files:
 	article = a['Article']
 
 	for i in range(100):
-		#data = {'Title':title[str(i)],'Timestamp':timestamp[str(i)],'Entities':entities[str(i)],'Doc_sentiment':doc_senti[str(i)],'Sent_sentiment':sent_senti,'Subject_sentiment':subject_senti[str(i)],'Article':article[str(i)] }	
-		#print i		
-		#collection.insert_one(data)		
+		data = {'Title':title[str(i)],'Timestamp':timestamp[str(i)],'Entities':entities[str(i)],'Doc_sentiment':doc_senti[str(i)],'Sent_sentiment':sent_senti,'Subject_sentiment':subject_senti[str(i)],'Article':article[str(i)] }	
+		print i		
+		collection.insert_one(data)		
 				
 
 
