@@ -13,6 +13,7 @@
     "immutability-helper": "^2.1.1",
     "react": "^0.14.8",
     "react-dom": "^0.14.7",
+    "react-modal": "^1.6.5",
     "react-router": "^2.0.0",
     "react-text-filter": "^2.1.0"
   },

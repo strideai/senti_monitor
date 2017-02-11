@@ -3,6 +3,7 @@ import { Router, Route, hashHistory } from 'react-router'
 import Home from './Home'
 import Nav from './Nav'
 import Article from './article/Article'
+import Rules from './rules/Rules'
 
 const articles = [
 			{
@@ -34,13 +35,11 @@ const articles = [
 class App extends React.Component {
 	render() {
 		return (
-			<div>
-			
 			<Router history={hashHistory}>
 				<Route path="/" component={Home} articles={articles}/>
+				<Route path="/rules" component={Rules} />
 				<Route path="/article/:articleId" component={Article} articles={articles}/>
 			</Router>
-			</div>
 		)
 	}
 }

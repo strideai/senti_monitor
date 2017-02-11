@@ -47,9 +47,9 @@ class Home extends React.Component {
 		var handleChoice = this.handleChoice
 		return (
 			<div>
-			<Nav />
+			<Nav active={Constant.pages.HOME} />
 			<FilterBar handleChoice={handleChoice} />
-			<div className='container-fluid'>
+			<div className='container-fluid' style={{'marginTop': '14px'}}>
 			<div className='row'>
 			<div className='col-sm-1'></div>
 			<div className='col-sm-3 entity-list-col'>

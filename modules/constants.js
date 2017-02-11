@@ -9,5 +9,9 @@ module.exports = {
 		'VP': 'Very positive',
 		'NE': 'Negative',
 		'VNE': 'Very Negative'
+	},
+	pages: {
+		HOME: 1,
+		RULES: 2
 	}
 }

@@ -35,12 +35,6 @@ class Feed extends React.Component {
 			return total
 		}
 
-		/*var sorted = result.sort(function(a, b) {
-			return sortBy == Constant.DATE
-					? (a.date.getTime() - b.date.getTime())
-					: (getRelevantEntitySentiment(b) - getRelevantEntitySentiment(a))
-		}).map((a) => <ArticleListItem key={a.id} article={a} />)*/
-
 		var sorted = result.sort(function(a, b) {
 			if (sortBy == Constant.sortOptions.DATE) {
 				return b.date.getTime() - a.date.getTime()
