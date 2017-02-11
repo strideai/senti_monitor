@@ -20,6 +20,7 @@ class SearchBar extends React.Component {
 		           ref={(input) => this.filterTextInput = input}
 		           onChange={this.handleChange}
 		         />
+		         <button type="button" className="btn btn-primary compare-entities">Compare</button>
 			</form>
 		)
 	}

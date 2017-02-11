@@ -49,13 +49,14 @@ class Home extends React.Component {
 			<div>
 			<Nav />
 			<FilterBar handleChoice={handleChoice} />
-			<div className='container'>
+			<div className='container-fluid'>
 			<div className='row'>
-			<div className='col-sm-9'>
-				<Feed selectedIndexOf={this.selectedIndexOf} sortBy={this.state.sortBy} selectedEntities={this.state.selectedEntities} articles={articles} />
-			</div>
+			<div className='col-sm-1'></div>
 			<div className='col-sm-3 entity-list-col'>
-				<Entities handleChangeSelectedEntities={this.handleChangeSelectedEntities} selectedEntities={this.state.selectedEntities}/>
+				<Entities selectedIndexOf={this.selectedIndexOf} handleChangeSelectedEntities={this.handleChangeSelectedEntities} selectedEntities={this.state.selectedEntities}/>
+			</div>
+			<div className='col-sm-8'>
+				<Feed selectedIndexOf={this.selectedIndexOf} sortBy={this.state.sortBy} selectedEntities={this.state.selectedEntities} articles={articles} />
 			</div>
 			</div>
 			</div>

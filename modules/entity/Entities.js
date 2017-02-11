@@ -27,7 +27,7 @@ class Entities extends React.Component {
 		return (
 			<div className='entities'>
 				<SearchBar filter={this.state.filter} onUserInput={this.handleUserInput} />	
-				<EntityList handleClick={this.props.handleChangeSelectedEntities} selectedEntities={this.props.selectedEntities} entities={this.state.entities.sort(function(a, b) {return a.name.localeCompare(b.name)})} filter={this.state.filter} />
+				<EntityList selectedIndexOf={this.props.selectedIndexOf} handleClick={this.props.handleChangeSelectedEntities} selectedEntities={this.props.selectedEntities} entities={this.state.entities.sort(function(a, b) {return a.name.localeCompare(b.name)})} filter={this.state.filter} />
 			</div>
 		)
 	}

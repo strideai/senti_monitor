@@ -12,15 +12,13 @@ class EntityListItem extends React.Component {
 	}
 
 	getClassName() {
-		return this.props.selected ? 'entity-list-right badge badge-pill badge-default entity-list-item entity-list-item-selected' : 'entity-list-right badge badge-pill badge-default'
+		return this.props.selected ? 'entity-list-right entity-list-item entity-list-item-selected' : 'entity-list-right entity-list-item'
 	}
 
 	render() {
 		return (
-			<li ref={(li) => this.entityListItem = li} onClick={this.handleClick} className='entity-list-item'>
-			<span className={this.getClassName()}>
+			<li ref={(li) => this.entityListItem = li} onClick={this.handleClick} className={this.getClassName()}>
 				{this.props.entity.name}
-			</span>
 			</li>
 		)
 	}

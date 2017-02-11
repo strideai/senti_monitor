@@ -1,9 +1,25 @@
 import React from 'react'
 import { Link } from 'react-router'
+const Constant = require('../constants')
 
 class ArticleListItem extends React.Component {
 	constructor(props) {
 		super(props)
+	}
+
+	formatDate(date) {
+		var monthNames = [
+		"January", "February", "March",
+		"April", "May", "June", "July",
+		"August", "September", "October",
+		"November", "December"
+		];
+
+		var day = date.getDate();
+		var monthIndex = date.getMonth();
+		var year = date.getFullYear();
+
+		return day + ' ' + monthNames[monthIndex] + ' ' + year;
 	}
 	
 	prettyDate(time){
@@ -12,7 +28,7 @@ class ArticleListItem extends React.Component {
 			day_diff = Math.floor(diff / 86400);
 				
 		if ( isNaN(day_diff) || day_diff < 0 || day_diff >= 31 )
-			return;
+			return this.formatDate(date)
 				
 		return day_diff == 0 && (
 				diff < 60 && "just now" ||
@@ -40,7 +56,7 @@ class ArticleListItem extends React.Component {
 			<div className='card article-list-item'>
 				<div className='article-title'>
 					<div className="article-date">
-						{this.props.article.date ? this.prettyDate(this.props.article.date.toDateString()) : ''}
+						{this.props.article.date ? this.prettyDate(this.props.article.date.toDateString()) : ''} &bull; {Constant.sentiments[this.props.article.articleSentiment.sentiment]}
 					</div>
 						<h4><Link className="article-title" to={"/article/" + this.props.article.id}>{this.props.article.title}</Link></h4>
 				</div>
