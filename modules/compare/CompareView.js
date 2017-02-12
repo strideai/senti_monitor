@@ -34,7 +34,7 @@ class CompareView extends React.Component {
 	getColumns() {
 		return this.state.selectedEntities.slice(0, 2).map((e) => (
 			<div className={this.getColWidth()}>
-				<CompareColumn key={e.name} entity={e} />
+				<CompareColumn key={e.text} entity={e} />
 			</div>
 		))
 	}
@@ -42,7 +42,7 @@ class CompareView extends React.Component {
 	selectedIndexOf(entity) {
 		var selected = this.state.selectedEntities
 		for (var i = 0; i < selected.length; i++) {
-			if (selected[i].name == entity.name)
+			if (selected[i].text == entity.text)
 				return i
 		}
 		return -1

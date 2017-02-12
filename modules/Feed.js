@@ -1,32 +1,15 @@
 import React from 'react'
 import ArticleListItem from './article/ArticleListItem'
 const Constant = require('./constants')
-import 'whatwg-fetch'
+
 
 class Feed extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = {
-			feedLoaded: false,
-			articles: []
-		}
-		this.loadFeed = this.loadFeed.bind(this)
-		fetch(Constant.API_ROOT_URL + '/feed?offset=0&limit=10')
-			.then(function(response) {
-				return response.json()
-			}).then(this.loadFeed)
-	}
-
-	loadFeed(json) {
-		console.log(json)
-		this.setState({feedLoaded: true})
-		this.setState({articles: json})
 	}
 
 	render() {
-		if (this.props.feedLoaded)
-			console.log(this.props)
-		var articles = this.state.articles
+		var articles = this.props.articles
 		var selected = this.props.selectedEntities
 		var selectedIndexOf = this.props.selectedIndexOf
 		var sortBy = this.props.sortBy
@@ -34,7 +17,7 @@ class Feed extends React.Component {
 		const isArticleSelected = function(a) {
 			for (var i = 0; i < selected.length; i++) {
 				for (var j = 0; j < a.entities.length; j++) {
-					if (a.entities[j].name == selected[i].name)
+					if (a.entities[j].text == selected[i].text)
 						return true
 				}
 			}

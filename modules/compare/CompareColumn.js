@@ -8,7 +8,7 @@ class CompareColumn extends React.Component {
 	render() {
 		return (
 			<div>
-				{ this.props.entity.name }
+				{ this.props.entity.text }
 			</div>
 		)
 	}

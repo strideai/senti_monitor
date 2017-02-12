@@ -65,12 +65,11 @@ class Home extends React.Component {
 		this.selectedIndexOf = this.selectedIndexOf.bind(this)
 	}
 
-
 	/* Returns index of entity in the list of selected entities */
 	selectedIndexOf(entity) {
 		var selected = this.state.selectedEntities
 		for (var i = 0; i < selected.length; i++) {
-			if (selected[i].name == entity.name)
+			if (selected[i].text == entity.text)
 				return i
 		}
 		return -1
@@ -101,10 +100,10 @@ class Home extends React.Component {
 			<div className='row'>
 			<div className='col-sm-1'></div>
 			<div className='col-sm-3 entity-list-col'>
-				<Entities selectedIndexOf={this.selectedIndexOf} handleChangeSelectedEntities={this.handleChangeSelectedEntities} selectedEntities={this.state.selectedEntities}/>
+				<Entities entities={this.props.entities} selectedIndexOf={this.selectedIndexOf} handleChangeSelectedEntities={this.handleChangeSelectedEntities} selectedEntities={this.state.selectedEntities}/>
 			</div>
 			<div className='col-sm-8'>
-				<Feed feedLoaded={this.state.feedLoaded} handleChangeSelectedEntities={this.handleChangeSelectedEntities} selectedIndexOf={this.selectedIndexOf} sortBy={this.state.sortBy} selectedEntities={this.state.selectedEntities} articles={articles} />
+				<Feed articles={this.props.articles} feedLoaded={this.state.feedLoaded} handleChangeSelectedEntities={this.handleChangeSelectedEntities} selectedIndexOf={this.selectedIndexOf} sortBy={this.state.sortBy} selectedEntities={this.state.selectedEntities}  />
 			</div>
 			</div>
 			</div>

@@ -18,7 +18,7 @@ class EntityListItem extends React.Component {
 	render() {
 		return (
 			<div ref={(li) => this.entityListItem = li} onClick={this.handleClick} className={this.getClassName()}>
-				{this.props.entity.name}
+				{this.props.entity.text}
 			</div>
 		)
 	}
