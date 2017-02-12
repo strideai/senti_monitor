@@ -8,12 +8,15 @@ class RuleList extends React.Component {
 
 	render() {
 		const getRuleList = (rules) => rules.map(
-			(r) => <RuleListItem key={r.id} rule={r} onClick={this.props.onClick} />
+			(r) => <RuleListItem key={r.created} rule={r} onClick={this.props.onClick} />
 		)
 
 		return (
-			<div classNmae='rule-list'>
+			<div>
+			<button className='btn btn-primary'>Add new rule</button>
+			<div className='rule-list'>
 				{ getRuleList(this.props.rules) }
+			</div>
 			</div>
 		)
 	}

@@ -14,6 +14,7 @@
 body {
 	height: auto;
 	min-height: 100px;
+	overflow-y: scroll;
 }
 
 .navbar {
@@ -100,16 +101,7 @@ body {
 :-moz-placeholder { /* Firefox 18- 
   color: white;
 }*/
-input[type="search"] {
-	border: none;
-	border-color: transparent;
-	padding: 10px;
-	width: 100%;
-	margin: auto auto;
-	font-family: "Roboto", sans-serif;
-	color: white;
-	background: #61737b;
-}
+
 .article-title:hover, .article-title:focus, .article-title:active {
 	text-decoration: none;
 }
@@ -165,4 +157,26 @@ div.container {
 	margin-top: 0;
 	font-family: 'Roboto', sans-serif;
 	font-size: 12px;
+}
+
+
+
+
+.rule-field {
+	font-weight: bold;
+	border: none;
+	width: 100%;
+	outline: none;
+	display: inline;
+	-webkit-transition-duration: 1s;
+}
+
+.rule-name {
+	font-size: 35px;
+	overflow: auto;
+	resize: none;
+}
+
+.rule-entity {
+	font-size: 20px;
 }

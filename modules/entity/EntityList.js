@@ -12,7 +12,7 @@ class EntityList extends React.Component {
 		var selectedEntities = this.props.selectedEntities
 		var selectedIndexOf = this.props.selectedIndexOf
 		const getEntityList = entities => entities.sort().map(
-			(e) => <EntityListItem key={e.name} entity={e} selected={selectedEntities.indexOf(e) != -1} onClick={handleClick} />
+			(e) => <EntityListItem key={e.name} entity={e} selected={this.props.selectedIndexOf(e) != -1} onClick={handleClick} />
 		)
 
 		var filtered = this.props.entities.filter(

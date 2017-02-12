@@ -8,12 +8,12 @@ class Entities extends React.Component {
 		this.state = {
 			filter: '',
 			entities: [
-				{name: 'SocGen'}, 
-				{name: 'Bank of Baroda'}, 
-				{name: 'Bank of India'},
-				{name: 'Paytm'},
-				{name: 'MobiKwik'},
-				{name: 'Freecharge'}
+				{name: 'McDonalds'}, 
+				{name: 'Bank of England'}, 
+				{name: 'Facebook'},
+				{name: 'Apple INC'},
+				{name: 'Peregrine Pharmaceuticals'},
+				{name: 'Malaysia Airlines'}
 			]
 		}
 		this.handleUserInput = this.handleUserInput.bind(this)
@@ -26,7 +26,7 @@ class Entities extends React.Component {
 	render() {
 		return (
 			<div className='entities'>
-				<SearchBar filter={this.state.filter} onUserInput={this.handleUserInput} />	
+				<SearchBar filter={this.state.filter} onUserInput={this.handleUserInput} />
 				<EntityList selectedIndexOf={this.props.selectedIndexOf} handleClick={this.props.handleChangeSelectedEntities} selectedEntities={this.props.selectedEntities} entities={this.state.entities.sort(function(a, b) {return a.name.localeCompare(b.name)})} filter={this.state.filter} />
 			</div>
 		)

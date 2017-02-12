@@ -5,7 +5,18 @@ import RuleView from './RuleView'
 const Constant = require('../constants')
 
 const rules = [
-	
+	{
+		created: new Date(),
+		title: '3er',
+		entity: 'SocGen',
+		condition: {
+			op: Constant.operator.LT,
+			value: -2
+		},
+		notification: {
+			message: 'Arrange for press report'
+		}
+	}
 ]
 
 class Rules extends React.Component {
@@ -26,11 +37,11 @@ class Rules extends React.Component {
 		return (
 			<div>
 				<Nav active={Constant.pages.RULES} />
-				<div className='container-fluid'>
+				<div className='container-fluid' style={{'marginTop': '14px'}}>
 				<div className='row'>
 					<div className='col-sm-1'></div>
 					<div className='rule-list-col col-sm-3'>
-						<RuleList />
+						<RuleList rules={rules} />
 					</div>
 					<div className='col-sm-8'>
 						<RuleView rule={this.state.currentRule} />

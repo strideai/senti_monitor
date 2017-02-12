@@ -5,6 +5,7 @@ const Constant = require('../constants')
 class ArticleListItem extends React.Component {
 	constructor(props) {
 		super(props)
+		this.handleTagClick = this.handleTagClick.bind(this)
 	}
 
 	formatDate(date) {
@@ -41,11 +42,15 @@ class ArticleListItem extends React.Component {
 			day_diff < 31 && Math.ceil( day_diff / 7 ) + " weeks ago";
 	}
 
+	handleTagClick(entity) {
+		this.props.onClick(entity)
+	}
+
 	getSentimentTag(entity) {
 		return (
 			entity.sentiment >= 0 
-				? (<span key={entity.name} className="badge badge-pill badge-success">{entity.name}</span>)
-				: (<span key={entity.name} className="badge badge-pill badge-danger">{entity.name}</span>)
+				? (<span key={entity.name} onClick={() => this.handleTagClick(entity)} className="badge badge-pill badge-success">{entity.name}</span>)
+				: (<span key={entity.name} onClick={() => this.handleTagClick(entity)} className="badge badge-pill badge-danger">{entity.name}</span>)
 		)
 	}
 

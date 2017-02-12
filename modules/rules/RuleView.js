@@ -7,8 +7,9 @@ class RuleView extends React.Component {
 
 	render() {
 		return (
-			<div>
-				
+			<div className='rule-view'>
+				<input type="text" className='rule-field rule-name' placeholder='Title' rows="1" />
+				<input type='text' className='rule-field rule-entity' placeholder='Entity' />
 			</div>
 		)
 	}
