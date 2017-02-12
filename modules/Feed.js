@@ -11,10 +11,10 @@ class Feed extends React.Component {
 			articles: []
 		}
 		this.loadFeed = this.loadFeed.bind(this)
-		/*fetch(Constant.API_ROOT_URL + '/feed?offset=0&limit=5')
+		fetch(Constant.API_ROOT_URL + '/feed?offset=0&limit=10')
 			.then(function(response) {
 				return response.json()
-			}).then(this.loadFeed)*/
+			}).then(this.loadFeed)
 	}
 
 	loadFeed(json) {
@@ -26,7 +26,7 @@ class Feed extends React.Component {
 	render() {
 		if (this.props.feedLoaded)
 			console.log(this.props)
-		var articles = this.props.articles
+		var articles = this.state.articles
 		var selected = this.props.selectedEntities
 		var selectedIndexOf = this.props.selectedIndexOf
 		var sortBy = this.props.sortBy

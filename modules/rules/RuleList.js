@@ -13,7 +13,7 @@ class RuleList extends React.Component {
 
 		return (
 			<div>
-			<button className='btn btn-primary'>Add new rule</button>
+			<button className='btn btn-primary add-new-rule'>New rule</button>
 			<div className='rule-list'>
 				{ getRuleList(this.props.rules) }
 			</div>

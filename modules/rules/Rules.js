@@ -7,12 +7,18 @@ const Constant = require('../constants')
 const rules = [
 	{
 		created: new Date(),
-		title: '3er',
+		title: 'SocGen catastrophe',
 		entity: 'SocGen',
-		condition: {
-			op: Constant.operator.LT,
-			value: -2
-		},
+		conditions: [Constant.sentiments['Ne'], Constant.sentiments['VNe']],
+		notification: {
+			message: 'Arrange for press report'
+		}
+	},
+	{
+		created: new Date(2012, 2, 2),
+		title: 'Find new place to eat',
+		entity: 'McDonald\'s',
+		conditions: [Constant.sentiments['VP']],
 		notification: {
 			message: 'Arrange for press report'
 		}

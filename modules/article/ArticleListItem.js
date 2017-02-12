@@ -48,9 +48,9 @@ class ArticleListItem extends React.Component {
 
 	getSentimentTag(entity) {
 		return (
-			entity.sentiment >= 0 
-				? (<span key={entity.name} onClick={() => this.handleTagClick(entity)} className="badge badge-pill badge-success">{entity.name}</span>)
-				: (<span key={entity.name} onClick={() => this.handleTagClick(entity)} className="badge badge-pill badge-danger">{entity.name}</span>)
+			entity.score >= 0 
+				? (<span key={entity.text} onClick={() => this.handleTagClick(entity)} className="badge badge-pill badge-success">{entity.text}</span>)
+				: (<span key={entity.text} onClick={() => this.handleTagClick(entity)} className="badge badge-pill badge-danger">{entity.text}</span>)
 		)
 	}
 
@@ -61,7 +61,7 @@ class ArticleListItem extends React.Component {
 			<div className='card article-list-item'>
 				<div className='article-title'>
 					<div className="article-date">
-						{this.props.article.date ? this.prettyDate(this.props.article.date.toDateString()) : ''} &bull; {Constant.sentiments[this.props.article.articleSentiment.sentiment]}
+						{this.props.article.id ? this.prettyDate(new Date(this.props.article.id).toDateString()) : ''} &bull; {Constant.sentiments[this.props.article.articleSentiment.sentiment]}
 					</div>
 						<h4><Link className="article-title" to={"/article/" + this.props.article.id}>{this.props.article.title}</Link></h4>
 				</div>

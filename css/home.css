@@ -161,9 +161,10 @@ div.container {
 
 
 
-
+.rule-list-col {
+	margin-top: 14px;
+}
 .rule-field {
-	font-weight: bold;
 	border: none;
 	width: 100%;
 	outline: none;
@@ -174,9 +175,30 @@ div.container {
 .rule-name {
 	font-size: 35px;
 	overflow: auto;
+	font-weight: bold;
 	resize: none;
 }
 
 .rule-entity {
 	font-size: 20px;
+}
+.add-new-rule {
+	margin-bottom: 10px;
+	adding: 8px;
+    font-size: 14px;
+	cursor: pointer;
+}
+.rule-list-item {
+	cursor: pointer;
+	width: 85%;
+	padding: 6px;
+	border: 1px solid #e5e5e5;
+	margin-bottom: 5px;
+}
+.rule-list-item-title {
+	font-weight: bold;
+	font-size: 15px;
+}
+.rule-list-item-condition {
+	font-size: 14px;
 }

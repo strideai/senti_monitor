@@ -12,10 +12,13 @@ class RuleListItem extends React.Component {
 
 	render() {
 		const rule = this.props.rule
+		const getConditions = rule.conditions.map((c) => (
+			c + ', '
+		))
 		return (
 			<div ref={(li) => this.ruleListItem = li} onClick={this.handleClick} className='rule-list-item'>
 				<div className='rule-list-item-title'>{ rule.title }</div>
-				
+				<div className='rule-list-item-condition'>{ rule.conditions }</div>
 			</div>
 		)
 	}
