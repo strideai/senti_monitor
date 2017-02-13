@@ -25921,7 +25921,7 @@
 			GTE: 4,
 			NE: 5
 		},
-		API_ROOT_URL: 'http://6135e098.ngrok.io'
+		API_ROOT_URL: ''
 	};
 
 /***/ },
@@ -25949,6 +25949,8 @@
 	var _EntityList2 = _interopRequireDefault(_EntityList);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -25979,13 +25981,15 @@
 		}, {
 			key: 'render',
 			value: function render() {
+				var _React$createElement;
+
 				return _react2.default.createElement(
 					'div',
 					{ className: 'entities' },
 					_react2.default.createElement(_SearchBar2.default, { filter: this.state.filter, onUserInput: this.handleUserInput }),
-					_react2.default.createElement(_EntityList2.default, { topEntities: this.props.topEntities, selectedIndexOf: this.props.selectedIndexOf, handleClick: this.props.handleChangeSelectedEntities, selectedEntities: this.props.selectedEntities, entities: this.props.entities.sort(function (a, b) {
-							return a.trim().localeCompare(b.trim());
-						}), filter: this.state.filter })
+					_react2.default.createElement(_EntityList2.default, (_React$createElement = { entities: this.props.topEntities, selectedIndexOf: this.props.selectedIndexOf, handleClick: this.props.handleChangeSelectedEntities, selectedEntities: this.props.selectedEntities }, _defineProperty(_React$createElement, 'entities', this.props.entities.sort(function (a, b) {
+						return a.trim().localeCompare(b.trim());
+					})), _defineProperty(_React$createElement, 'filter', this.state.filter), _React$createElement))
 				);
 			}
 		}]);
@@ -26108,11 +26112,11 @@
 
 				var handleClick = this.props.handleClick;
 				var selectedEntities = this.props.selectedEntities;
-				var topEntities = this.props.topEntities;
+				var topEntities = this.props.topEntities || [];
 				var selectedIndexOf = this.props.selectedIndexOf;
 				var allEntities = this.props.entities;
 
-				var entities = topEntities; //this.props.filter == '' && selectedEntities.length == 0 ? topEntities : Array.from(new Set(topEntities.concat(allEntities)))
+				var entities = allEntities; //this.props.filter == '' && selectedEntities.length == 0 ? topEntities : Array.from(new Set(topEntities.concat(allEntities)))
 
 				var getEntityList = function getEntityList(entities) {
 					return entities.sort().map(function (e) {
@@ -26123,6 +26127,8 @@
 				var filtered = entities.filter(function (e) {
 					return e.toLowerCase().trim().indexOf(_this2.props.filter.toLowerCase().trim()) != -1;
 				}).sort(function (a, b) {
+					if (topEntities.indexOf(a) != -1) return 1;
+					if (topEntities.indexOf(b) != -1) return -1;
 					if (selectedIndexOf(a) != -1 && selectedIndexOf(b) == -1) return -1;else if (selectedIndexOf(b) != -1 && selectedIndexOf(a) == -1) return 1;
 					return a.localeCompare(b);
 				});
@@ -27638,16 +27644,16 @@
 						null,
 						_react2.default.createElement(
 							'tr',
-							null,
+							{ className: 'meta-row' },
 							_react2.default.createElement(
 								'td',
-								{ colSpan: Math.min(_this3.state.selectedEntities.length, 3), style: { textAlign: 'center' } },
+								{ colSpan: Math.min(_this3.state.selectedEntities.length, 3) },
 								attr.name
 							)
 						),
 						_react2.default.createElement(
 							'tr',
-							null,
+							{ className: '' },
 							_this3.getRow(attr.attr)
 						)
 					));
@@ -27659,18 +27665,13 @@
 			key: 'getRow',
 			value: function getRow(attr) {
 				console.log(this.state);
-				var getTd = this.state.comparison.map(function (e) {
+				return this.state.comparison.map(function (e) {
 					return _react2.default.createElement(
 						'td',
 						null,
 						e[attr]
 					);
 				});
-				return _react2.default.createElement(
-					'tr',
-					null,
-					getTd
-				);
 			}
 		}, {
 			key: 'getTable',
@@ -27690,7 +27691,7 @@
 					return _react2.default.createElement(
 						'th',
 						{ className: _this4.getColWidth() + ' compare-entity-name' },
-						entity.text[0].toUpperCase() + entity.text.slice(1)
+						entity[0].toUpperCase() + entity.slice(1)
 					);
 				});
 				return _react2.default.createElement(
@@ -27717,7 +27718,7 @@
 			value: function selectedIndexOf(entity) {
 				var selected = this.state.selectedEntities;
 				for (var i = 0; i < selected.length; i++) {
-					if (selected[i].text == entity.text) return i;
+					if (selected[i] == entity) return i;
 				}
 				return -1;
 			}
