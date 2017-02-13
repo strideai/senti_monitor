@@ -3,7 +3,7 @@ from collections import Counter
 import subprocess as sp
 
 conn = pymongo.MongoClient('localhost',27017)              # Mongo Stuff
-conn.admin.authenticate('root', 'password')
+conn.admin.authenticate('root', 'themenwhopause')
 db = conn.news2
 collection = db.business
 
@@ -100,8 +100,8 @@ for file_no in files:
 				'posneg':posneg,
 				}
 		
-		collection.insert(data,check_keys=False)
+		#collection.insert(data,check_keys=False)
 		
-#with open('all_400','w') as g:
-#	g.write(str(total_counter))
+with open('all_counts','w') as g:
+	g.write(str(total_counter))
 
