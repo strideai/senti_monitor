@@ -18,6 +18,7 @@
     "react-modal": "^1.6.5",
     "react-router": "^2.0.0",
     "react-text-filter": "^2.1.0",
+    "webpack-dev-server": "^1.16.3",
     "whatwg-fetch": "^2.0.2"
   },
   "devDependencies": {

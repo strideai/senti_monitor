@@ -171,6 +171,9 @@ div.container {
 .compare-entity-col {
 	border: 1px solid #e5e5e5;
 }
+.meta-row {
+	font-weight: bold;
+}
 
 .rule-list-col {
 	margin-top: 14px;

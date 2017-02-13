@@ -4,7 +4,7 @@ import Home from './Home'
 import Nav from './Nav'
 import Article from './article/Article'
 import Rules from './rules/Rules'
-import CompareView from './compare/CompareView'
+import Compare from './compare/Compare'
 import 'whatwg-fetch'
 const Constant = require('./constants')
 
@@ -53,7 +53,7 @@ class App extends React.Component {
 			<Router history={hashHistory}>
 				<Route path="/" component={Nav}>
 					<IndexRoute component={() => <Home topEntities={this.state.topEntities} entities={this.state.entities} articles={this.state.articles}/>}/>
-					<Route path="/compare" component={() => <CompareView topEntities={this.state.topEntities}  entities={this.state.entities} />} />
+					<Route path="/compare" component={() => <Compare topEntities={this.state.topEntities}  entities={this.state.entities} />} />
 					<Route path="/rules" component={Rules} />
 					<Route path="/article/:articleId" component={Article} />
 				</Route>
