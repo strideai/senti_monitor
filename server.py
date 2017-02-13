@@ -8,7 +8,7 @@ import pymongo,json,os
 from urllib2 import Request, urlopen
 from collections import Counter
 
-conn = pymongo.MongoClient('localhost',27017)              # Mongo Stuff
+conn = pymongo.MongoClient('localhost',27017)             
 conn.admin.authenticate('root', 'themenwhopause')
 db = conn.news2
 collection = db.business
