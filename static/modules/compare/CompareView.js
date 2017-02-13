@@ -60,10 +60,10 @@ class CompareView extends React.Component {
 		comparisonAttrs.forEach((attr) => (
 			result.push(
 				<div>
-				<tr>
-					<td colSpan={Math.min(this.state.selectedEntities.length, 3)} style={{textAlign: 'center'}}>{attr.name}</td>
+				<tr className='meta-row'>
+					<td colSpan={Math.min(this.state.selectedEntities.length, 3)}>{attr.name}</td>
 				</tr>	
-				<tr>
+				<tr className=''>
 					{ this.getRow(attr.attr) }
 				</tr>
 				</div>
@@ -75,14 +75,9 @@ class CompareView extends React.Component {
 
 	getRow(attr) {
 		console.log(this.state)
-		const getTd = this.state.comparison.map((e) => (
+		return this.state.comparison.map((e) => (
 			<td>{e[attr]}</td>
 		))
-		return (
-			<tr>
-				{ getTd }
-			</tr>
-		)
 	}
 
 	getTable() {
@@ -91,7 +86,7 @@ class CompareView extends React.Component {
 		))
 		const getEntities = this.state.selectedEntities.slice(0, 3).map((entity) => (
 			<th className={this.getColWidth() + ' compare-entity-name'}>
-				{entity.text[0].toUpperCase() + entity.text.slice(1)}
+				{entity[0].toUpperCase() + entity.slice(1)}
 			</th>
 		))
 		return (
@@ -112,7 +107,7 @@ class CompareView extends React.Component {
 	selectedIndexOf(entity) {
 		var selected = this.state.selectedEntities
 		for (var i = 0; i < selected.length; i++) {
-			if (selected[i].text == entity.text)
+			if (selected[i] == entity)
 				return i
 		}
 		return -1

@@ -19,7 +19,7 @@ class Entities extends React.Component {
 		return (
 			<div className='entities'>
 				<SearchBar filter={this.state.filter} onUserInput={this.handleUserInput} />
-				<EntityList topEntities={this.props.topEntities} selectedIndexOf={this.props.selectedIndexOf} handleClick={this.props.handleChangeSelectedEntities} selectedEntities={this.props.selectedEntities} entities={this.props.entities.sort(function(a, b) {return a.trim().localeCompare(b.trim())})} filter={this.state.filter} />
+				<EntityList entities={this.props.topEntities} selectedIndexOf={this.props.selectedIndexOf} handleClick={this.props.handleChangeSelectedEntities} selectedEntities={this.props.selectedEntities} entities={this.props.entities.sort(function(a, b) {return a.trim().localeCompare(b.trim())})} filter={this.state.filter} />
 			</div>
 		)
 	}

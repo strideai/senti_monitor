@@ -10,11 +10,11 @@ class EntityList extends React.Component {
 	render() {
 		var handleClick = this.props.handleClick
 		var selectedEntities = this.props.selectedEntities
-		var topEntities = this.props.topEntities
+		var topEntities = this.props.topEntities || []
 		var selectedIndexOf = this.props.selectedIndexOf
 		var allEntities = this.props.entities
 
-		var entities = topEntities //this.props.filter == '' && selectedEntities.length == 0 ? topEntities : Array.from(new Set(topEntities.concat(allEntities)))
+		var entities = allEntities //this.props.filter == '' && selectedEntities.length == 0 ? topEntities : Array.from(new Set(topEntities.concat(allEntities)))
 
 		const getEntityList = entities => entities.sort().map(
 			(e) => <EntityListItem key={e} entity={e} selected={this.props.selectedIndexOf(e) != -1} onClick={handleClick} />
@@ -23,6 +23,10 @@ class EntityList extends React.Component {
 		var filtered = entities.filter(
 			(e) => e.toLowerCase().trim().indexOf(this.props.filter.toLowerCase().trim()) != -1
 		).sort(function(a, b) {
+			if (topEntities.indexOf(a) != -1)
+				return 1
+			if (topEntities.indexOf(b) != -1)
+				return -1
 			if (selectedIndexOf(a) != -1 && selectedIndexOf(b) == -1)
 				return -1
 			else if (selectedIndexOf(b) != -1 && selectedIndexOf(a) == -1)
