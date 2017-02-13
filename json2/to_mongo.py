@@ -3,7 +3,7 @@ from collections import Counter
 import subprocess as sp
 
 conn = pymongo.MongoClient('localhost',27017)              # Mongo Stuff
-conn.admin.authenticate('root', 'themenwhopause')
+conn.admin.authenticate('root', 'password')
 db = conn.news2
 collection = db.business
 
@@ -13,6 +13,9 @@ files2 = ['biz_Data_400_1.json', 'biz_Data_400_2.json','biz_Data_400_3.json']
 files = files2 + files1
 
 total_counter = Counter()
+neg_counter = Counter()
+pos_counter = Counter()
+mixed_counter = Counter()
 total_org = []
 
 for file_no in files:
@@ -60,7 +63,7 @@ for file_no in files:
 					k.append(n)
 		org = k[::]
 		org = map(lambda x:x.lower(),org) #Convert all to lower case
-		total_counter.update(org)
+		#total_counter.update(org)
 		local_count = Counter(org)
 
 		total_org += org
@@ -73,11 +76,15 @@ for file_no in files:
 			score = 0
 			if m['category'] =='positive':
 				pos_count+=1
+				pos_counter.update([m['text'].lower()])
 			elif m['category'] == 'negative':
 				neg_count+=1
+				neg_counter.update([m['text'].lower()])
 			else:
 				pos_count+=1
 				neg_count+=1
+				mixed_counter.update([m['text'].lower()])
+
 			score = (m['positive_score'] + m['negative_score'])/2
 			temp = {'positive_count':pos_count,'negative_count':neg_count,'score':score}
 			posneg.append({m['text'].lower().strip('.'):temp})
@@ -89,6 +96,7 @@ for file_no in files:
 			st = sub[m]['text'].lower()
 			sub[m]['text'] = st 
 		
+		total_counter.update([m['text'] for m in sub])
 
 		data = {'title':title[str(i)],
 				'Timestamp':timestamp[str(i)],
@@ -100,8 +108,18 @@ for file_no in files:
 				'posneg':posneg,
 				}
 		
-		#collection.insert(data,check_keys=False)
+		collection.insert(data,check_keys=False)
 		
-with open('all_counts','w') as g:
-	g.write(str(total_counter))
+with open('pos_counter','w') as g:
+	g.write(str(pos_counter))
+		
+with open('neg_counter','w') as h:
+	h.write(str(neg_counter))
 
+		
+with open('mixed_counter','w') as q:
+	q.write(str(mixed_counter))
+
+
+with open('total_counter','w') as p:
+	p.write(str(total_counter))
