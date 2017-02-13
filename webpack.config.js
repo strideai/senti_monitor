@@ -2,7 +2,7 @@ module.exports = {
   entry: './index.js',
 
   output: {
-    filename: 'bundle.js',
+    filename: './static/bundle.js',
     publicPath: ''
   },
 
