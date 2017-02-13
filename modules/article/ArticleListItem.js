@@ -50,8 +50,8 @@ class ArticleListItem extends React.Component {
 		entity.score = entity.positive_score + entity.negative_score
 		return (
 			entity.score >= 0 
-				? (<span key={entity.text} onClick={() => this.handleTagClick(entity.text)} className="badge badge-pill badge-success">{entity.text}</span>)
-				: (<span key={entity.text} onClick={() => this.handleTagClick(entity.text)} className="badge badge-pill badge-danger">{entity.text}</span>)
+				? (<span key={entity.text} onClick={() => this.handleTagClick(entity.text)} className="badge badge-pill badge-success">{entity.text[0].toUpperCase() + entity.text.slice(1)}</span>)
+				: (<span key={entity.text} onClick={() => this.handleTagClick(entity.text)} className="badge badge-pill badge-danger">{entity.text[0].toUpperCase() + entity.text.slice(1)}</span>)
 		)
 	}
 
