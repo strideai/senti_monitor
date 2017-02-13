@@ -53,7 +53,7 @@ class App extends React.Component {
 			<Router history={hashHistory}>
 				<Route path="/" component={Nav}>
 					<IndexRoute component={() => <Home topEntities={this.state.topEntities} entities={this.state.entities} articles={this.state.articles}/>}/>
-					<Route path="/compare" component={() => <CompareView entities={this.state.entities} />} />
+					<Route path="/compare" component={() => <CompareView topEntities={this.state.topEntities}  entities={this.state.entities} />} />
 					<Route path="/rules" component={Rules} />
 					<Route path="/article/:articleId" component={Article} />
 				</Route>

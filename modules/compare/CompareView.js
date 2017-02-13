@@ -37,7 +37,7 @@ class CompareView extends React.Component {
 			this.setState({selectedEntities: update(this.state.selectedEntities, {$push: [entity]})})
 		}
 		var params = this.state.selectedEntities
-		console.log('ergioneriognognerogn')
+		
 		console.log(params)
 		const updateState = (json) => this.setState({comparison: json})
 		fetch(Constant.API_ROOT_URL + '/compare?entities=' + params)
@@ -125,7 +125,7 @@ class CompareView extends React.Component {
 				<div className='row'>
 					
 					<div className='col-sm-3'>
-						<Entities entities={this.props.entities} selectedIndexOf={this.selectedIndexOf} handleChangeSelectedEntities={this.handleChangeSelectedEntities} selectedEntities={this.state.selectedEntities}/>
+						<Entities topEntities={this.props.topEntities} entities={this.props.entities} selectedIndexOf={this.selectedIndexOf} handleChangeSelectedEntities={this.handleChangeSelectedEntities} selectedEntities={this.state.selectedEntities}/>
 					</div>
 					
 					<div className='col-sm-9'>
