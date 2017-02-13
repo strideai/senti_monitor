@@ -9,7 +9,7 @@ from urllib2 import Request, urlopen
 from collections import Counter
 
 conn = pymongo.MongoClient('localhost',27017)              # Mongo Stuff
-conn.admin.authenticate('root', 'themenwhopause')
+conn.admin.authenticate('root', 'password')
 db = conn.news2
 collection = db.business
 
@@ -18,7 +18,7 @@ class feed(pyrestful.rest.RestHandler):
 	
 	@get(_path="/compare", _produces=mediatypes.APPLICATION_JSON)
 	def compare(self, name):
-		#try:
+		try:
 			entity1 = self.get_argument("entity1")
 			entity2 = self.get_argument("entity2")
 
@@ -84,8 +84,8 @@ class feed(pyrestful.rest.RestHandler):
 
 			return json_list
 
-		#except:
-			#return {"hello":"error"}		
+		except:
+			return {"hello":"error"}		
 
 	@get(_path="/feed", _produces=mediatypes.APPLICATION_JSON)
 	def say(self):
