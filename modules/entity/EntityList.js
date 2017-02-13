@@ -22,7 +22,7 @@ class EntityList extends React.Component {
 				return -1
 			else if (selectedIndexOf(b) != -1 && selectedIndexOf(a) == -1)
 				return 1
-			return 0
+			return a.text.localeCompare(b.text)
 		})
 
 		return (

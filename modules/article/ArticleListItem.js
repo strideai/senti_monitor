@@ -47,6 +47,7 @@ class ArticleListItem extends React.Component {
 	}
 
 	getSentimentTag(entity) {
+		entity.score = entity.positive_score + entity.negative_score
 		return (
 			entity.score >= 0 
 				? (<span key={entity.text} onClick={() => this.handleTagClick(entity)} className="badge badge-pill badge-success">{entity.text}</span>)

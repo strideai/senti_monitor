@@ -10,6 +10,11 @@ module.exports = {
 		'Ne': 'Negative',
 		'VNe': 'Very Negative'
 	},
+	pageUrls: {
+		'/': 1,
+		'/rules': 2,
+		'/compare': 3
+	},
 	pages: {
 		HOME: 1,
 		RULES: 2,
@@ -23,5 +28,5 @@ module.exports = {
 		GTE: 4,
 		NE: 5
 	},
-	API_ROOT_URL: 'http://33ba36a6.ngrok.io'
+	API_ROOT_URL: 'http://2a1078a7.ngrok.io'
 }

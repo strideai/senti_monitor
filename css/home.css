@@ -148,6 +148,9 @@ div.container {
 	width: 100px;
 	font-size: 13px;
 }
+
+
+
 .compare-entities {
 	display: inline;
 	margin-left: 5px;
@@ -158,8 +161,16 @@ div.container {
 	font-family: 'Roboto', sans-serif;
 	font-size: 12px;
 }
-
-
+.compare-entity-name {
+	font-size: 17px;
+	font-weight: bold;
+	text-align: center;
+	color: rgb(91, 95, 166);
+	font-family: "Roboto", sans-serif;
+}
+.compare-entity-col {
+	border: 1px solid #e5e5e5;
+}
 
 .rule-list-col {
 	margin-top: 14px;
@@ -177,6 +188,10 @@ div.container {
 	overflow: auto;
 	font-weight: bold;
 	resize: none;
+}
+
+table {
+	table-layout: fixed;
 }
 
 .rule-entity {

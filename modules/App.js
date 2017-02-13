@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router, Route, hashHistory } from 'react-router'
+import { Router, Route, hashHistory, IndexRoute } from 'react-router'
 import Home from './Home'
 import Nav from './Nav'
 import Article from './article/Article'
@@ -17,7 +17,7 @@ class App extends React.Component {
 			dataLoaded: false
 		}
 		this.loadFeed = this.loadFeed.bind(this)
-		fetch(Constant.API_ROOT_URL + '/feed?offset=0&limit=10')
+		fetch(Constant.API_ROOT_URL + '/feed?offset=0&limit=30')
 			.then(function(response) {
 				return response.json()
 			}).then(this.loadFeed)
@@ -38,10 +38,12 @@ class App extends React.Component {
 	render() {
 		return (
 			<Router history={hashHistory}>
-				<Route path="/" component={() => <Home entities={this.state.entities} articles={this.state.articles}/>}/>
-				<Route path="/compare" component={CompareView} />
-				<Route path="/rules" component={Rules} />
-				<Route path="/article/:articleId" component={Article} />
+				<Route path="/" component={Nav}>
+					<IndexRoute component={() => <Home entities={this.state.entities} articles={this.state.articles}/>}/>
+					<Route path="/compare" component={() => <CompareView entities={this.state.entities} />} />
+					<Route path="/rules" component={Rules} />
+					<Route path="/article/:articleId" component={Article} />
+				</Route>
 			</Router>
 		)
 	}

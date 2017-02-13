@@ -42,7 +42,6 @@ class Rules extends React.Component {
 	render() {
 		return (
 			<div>
-				<Nav active={Constant.pages.RULES} />
 				<div className='container-fluid' style={{'marginTop': '14px'}}>
 				<div className='row'>
 					<div className='col-sm-1'></div>

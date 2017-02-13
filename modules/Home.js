@@ -94,7 +94,6 @@ class Home extends React.Component {
 		var handleChoice = this.handleChoice
 		return (
 			<div>
-			<Nav active={Constant.pages.HOME} />
 			<FilterBar handleChoice={handleChoice} />
 			<div className='container-fluid' style={{'marginTop': '14px'}}>
 			<div className='row'>
