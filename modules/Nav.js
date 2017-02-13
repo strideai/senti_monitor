@@ -21,7 +21,7 @@ class Nav extends React.Component {
 				<Link to="/" className="navbar-brand" href="#">Panini</Link>
 				<Link to="/" className={this.getNavClass(Constant.pages.HOME)} href="#">Home</Link>
 				<Link to="/compare" className={this.getNavClass(Constant.pages.COMPARE)} href="#">Compare</Link>
-				<Link to="/rules" className={this.getNavClass(Constant.pages.RULES)} href="#">Rules</Link>
+				{/*<Link to="/rules" className={this.getNavClass(Constant.pages.RULES)} href="#">Rules</Link>*/}
 			</nav>
 			{ this.props.children }
 			</div>

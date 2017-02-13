@@ -168,8 +168,11 @@ div.container {
 	font-size: 17px;
 	font-weight: bold;
 	text-align: center;
-	color: rgb(91, 95, 166);
+	color: white;
 	font-family: "Roboto", sans-serif;
+}
+.compare-table {
+	
 }
 .compare-entity-col {
 	border: 1px solid #e5e5e5;
@@ -268,4 +271,10 @@ body {
 	cursor: pointer;
 	margin-top: 15px;
 	width: 150px;
+}
+thead {
+	background: teal;
+}
+thead > tr > td {
+	color: white;
 }

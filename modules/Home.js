@@ -55,7 +55,7 @@ class Home extends React.Component {
 			<div className='row'>
 			<div className='col-sm-1'></div>
 			<div className='col-sm-3 entity-list-col'>
-				<Entities topEntities={this.props.topEntities} entities={this.props.entities} selectedIndexOf={this.selectedIndexOf} handleChangeSelectedEntities={this.handleChangeSelectedEntities} selectedEntities={this.state.selectedEntities}/>
+				<Entities entities={this.props.entities} selectedIndexOf={this.selectedIndexOf} handleChangeSelectedEntities={this.handleChangeSelectedEntities} selectedEntities={this.state.selectedEntities}/>
 			</div>
 			<div className='col-sm-8'>
 				<Feed articles={this.props.articles} feedLoaded={this.state.feedLoaded} handleChangeSelectedEntities={this.handleChangeSelectedEntities} selectedIndexOf={this.selectedIndexOf} sortBy={this.state.sortBy} selectedEntities={this.state.selectedEntities}  />

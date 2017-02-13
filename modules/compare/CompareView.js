@@ -16,12 +16,16 @@ const comparisonAttrs = [
 class CompareView extends React.Component {
 	constructor(props) {
 		super(props)
-		this.getRow = this.getRow.bind(this)
 		this.handleChangeSelectedEntities = this.handleChangeSelectedEntities.bind(this)
 		this.getRows = this.getRows.bind(this)
 		this.getTable = this.getTable.bind(this)
 		//this.getColWidth = this.getColWidth.bind(this)
 	}
+	
+	toTitleCase(str) {
+	    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+	}
+
 
 	handleChangeSelectedEntities(entity) {
 		this.props.onClick(entity)
@@ -29,21 +33,17 @@ class CompareView extends React.Component {
 
 	getRows() {
 		var result = []
+		const row = (attr) => this.props.comparison.map((e) => (
+			<td>{e[attr.attr]}</td>
+		))
 		comparisonAttrs.forEach((attr) => (
 			result.push(
 				<tr>
-					<td>{attr.name}</td>
-					{ this.getRow(attr) }
+					<td style={{fontWeight: 'bold'}}>{attr.name}</td>
+					{ row(attr) }
 				</tr>
 			)
 		))		
-		return result
-	}
-
-	getRow(attr) {
-		const result = this.props.comparison.map((e) => (
-			<td>{e[attr.attr]}</td>
-		))
 		return result
 	}
 
@@ -51,7 +51,7 @@ class CompareView extends React.Component {
 		//const getEntities = [<th className='compare-entity-name'>g</th>]
 		const getEntities = this.props.selectedEntities.slice(0, 3).map((entity) => (
 			<th className='compare-entity-name'>
-				{entity[0].toUpperCase() + entity.slice(1)}
+				{this.toTitleCase(entity)}
 			</th>
 		))
 		getEntities.unshift((<th className='compare-entity-name'></th>))
@@ -79,7 +79,7 @@ class CompareView extends React.Component {
 				<div className='row'>
 					
 					<div className='col-sm-3'>
-						<Entities topEntities={this.props.topEntities} entities={this.props.entities} selectedIndexOf={this.props.selectedIndexOf} handleChangeSelectedEntities={this.handleChangeSelectedEntities} selectedEntities={this.props.selectedEntities}/>
+						<Entities entities={this.props.entities} selectedIndexOf={this.props.selectedIndexOf} handleChangeSelectedEntities={this.handleChangeSelectedEntities} selectedEntities={this.props.selectedEntities}/>
 					</div>
 					
 					<div className='col-sm-9'>

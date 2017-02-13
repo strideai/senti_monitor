@@ -48,7 +48,7 @@ class Compare extends React.Component {
 	render() {
 		return (
 			<div>
-				<CompareView selectedIndexOf={this.selectedIndexOf} topEntities={this.props.topEntities} entities={this.props.entities} selectedEntities={this.state.selectedEntities} comparison={this.state.comparison.slice(0, 3)} onClick={this.handleClick} />
+				<CompareView selectedIndexOf={this.selectedIndexOf} entities={this.props.entities} selectedEntities={this.state.selectedEntities} comparison={this.state.comparison.slice(0, 3)} onClick={this.handleClick} />
 			</div>
 		)
 	}

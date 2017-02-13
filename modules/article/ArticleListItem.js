@@ -56,12 +56,16 @@ class ArticleListItem extends React.Component {
 		this.setState({showModal: true})
 	}
 
+	toTitleCase(str) {
+	    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+	}
+
 	getSentimentTag(entity) {
 		entity.score = entity.positive_score + entity.negative_score
 		return (
 			entity.score >= 0 
-				? (<span key={entity.text} onClick={() => this.handleTagClick(entity.text)} className="badge badge-pill badge-success">{entity.text[0].toUpperCase() + entity.text.slice(1)}</span>)
-				: (<span key={entity.text} onClick={() => this.handleTagClick(entity.text)} className="badge badge-pill badge-danger">{entity.text[0].toUpperCase() + entity.text.slice(1)}</span>)
+				? (<span key={entity.text} onClick={() => this.handleTagClick(entity.text)} className="badge badge-pill badge-success">{this.toTitleCase(entity.text)}</span>)
+				: (<span key={entity.text} onClick={() => this.handleTagClick(entity.text)} className="badge badge-pill badge-danger">{this.toTitleCase(entity.text)}</span>)
 		)
 	}
 
