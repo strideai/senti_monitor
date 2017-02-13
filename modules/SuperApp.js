@@ -18,11 +18,11 @@ class SuperApp extends React.Component {
 	numberOfArticles() {
 		return (
 			<div className='container-fluid question-container'>
-			<form className='question-children'>
+			<div className='question-children'>
 				<h2 className='question'>How many articles do you want to load?</h2>
-				<input ref={(input) => this.answer = input} name='question' type='text' className='question-article-count' placeholder='100' />
+				<input ref={(input) => this.answer = input} type='text' className='question-article-count' placeholder='100' />
 				<button onClick={this.handleClick} className='btn btn-primary question-submit' type='submit' required={true}>Load articles</button>
-			</form>
+			</div>
 			</div>
 		)
 	}
@@ -30,7 +30,7 @@ class SuperApp extends React.Component {
 	render() {
 		console.log(this.state.count)
 		return (
-			this.state.count != -1 ? <App count={this.state.count} /> : this.numberOfArticles()
+			this.state.count != -1 ? <App count={this.state.count - 1} /> : this.numberOfArticles()
 		)
 	}
 }
