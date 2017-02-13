@@ -18,7 +18,7 @@ class EntityListItem extends React.Component {
 	render() {
 		return (
 			<div ref={(li) => this.entityListItem = li} onClick={this.handleClick} className={this.getClassName()}>
-				{this.props.entity.text}
+				{this.props.entity[0].toUpperCase() + this.props.entity.slice(1)}
 			</div>
 		)
 	}

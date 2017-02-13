@@ -14,10 +14,23 @@ class App extends React.Component {
 		this.state = {
 			articles: [],
 			entities: [],
+			topEntities: [
+				'The Bank of England',
+				'PayPal',
+				'eBay',
+				'The Federal Reserve Bank',
+				'Comcast',
+				'Pandora One',
+				'Walmart',
+				'Google',
+				'Toyota',
+				'Jos . A. Bank Clothiers'
+			],
+
 			dataLoaded: false
 		}
 		this.loadFeed = this.loadFeed.bind(this)
-		fetch(Constant.API_ROOT_URL + '/feed?offset=0&limit=30')
+		fetch(Constant.API_ROOT_URL + '/feed?offset=0&limit=100')
 			.then(function(response) {
 				return response.json()
 			}).then(this.loadFeed)
@@ -29,7 +42,7 @@ class App extends React.Component {
 		var entities = []
 		this.state.articles.forEach((a) => (
 			a.entities.forEach((e) => (
-				entities.push(e)
+				entities.push(e.text)
 			))
 		))
 		this.setState({entities: entities})
@@ -39,7 +52,7 @@ class App extends React.Component {
 		return (
 			<Router history={hashHistory}>
 				<Route path="/" component={Nav}>
-					<IndexRoute component={() => <Home entities={this.state.entities} articles={this.state.articles}/>}/>
+					<IndexRoute component={() => <Home topEntities={this.state.topEntities} entities={this.state.entities} articles={this.state.articles}/>}/>
 					<Route path="/compare" component={() => <CompareView entities={this.state.entities} />} />
 					<Route path="/rules" component={Rules} />
 					<Route path="/article/:articleId" component={Article} />

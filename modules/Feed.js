@@ -17,7 +17,7 @@ class Feed extends React.Component {
 		const isArticleSelected = function(a) {
 			for (var i = 0; i < selected.length; i++) {
 				for (var j = 0; j < a.entities.length; j++) {
-					if (a.entities[j].text == selected[i].text)
+					if (a.entities[j].text == selected[i])
 						return true
 				}
 			}
