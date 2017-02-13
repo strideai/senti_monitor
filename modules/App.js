@@ -30,7 +30,7 @@ class App extends React.Component {
 			dataLoaded: false
 		}
 		this.loadFeed = this.loadFeed.bind(this)
-		fetch(Constant.API_ROOT_URL + '/feed?offset=0&limit=100')
+		fetch(Constant.API_ROOT_URL + '/feed?offset=0&limit=' + this.props.count)
 			.then(function(response) {
 				return response.json()
 			}).then(this.loadFeed)
@@ -55,7 +55,6 @@ class App extends React.Component {
 					<IndexRoute component={() => <Home topEntities={this.state.topEntities} entities={this.state.entities} articles={this.state.articles}/>}/>
 					<Route path="/compare" component={() => <Compare topEntities={this.state.topEntities}  entities={this.state.entities} />} />
 					<Route path="/rules" component={Rules} />
-					<Route path="/article/:articleId" component={Article} />
 				</Route>
 			</Router>
 		)

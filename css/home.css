@@ -4,6 +4,7 @@
 	font-weight: bold;
 	margin-left: 5px;
 	text-indent: 0;
+	cursor: pointer;
 }
 .article-title-center {
 	text-align: center;
@@ -21,7 +22,7 @@ body {
 	background-color: #fff;
 	padding: 20px;
 	margin-bottom: 0;
-	z-index: 10;
+	z-index: 2;
 	border-bottom: 1px solid #eee;
 }
 .nav-link, .nav-link:hover, .nav-link:active, .nav-link:focus {
@@ -145,12 +146,14 @@ div.container {
 
 .filter-option {
 	font-family: "Roboto", sans-serif;
-	width: 100px;
+	width: 190px;
 	font-size: 13px;
 }
 
 
-
+.compare-zero {
+	
+}
 .compare-entities {
 	display: inline;
 	margin-left: 5px;
@@ -219,4 +222,50 @@ table {
 }
 .rule-list-item-condition {
 	font-size: 14px;
+}
+.reading {
+	padding: 50px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+}
+
+.question-container {
+	height:100vh;
+	margin: 0 10%;
+	display: block;
+}
+.question-children {
+	position: relative;
+	transform: translateY(-100%);
+	text-align: center;
+	top: 50%;
+}
+.question {
+	font-family: 'Open Sans', sans-serif;
+	color: #666;
+	text-align: center;
+}
+.question-article-count {
+	width: 50%;
+	margin: auto auto;
+	display: block;
+	text-align: center;
+	padding: 10px;
+	border: none;
+	border-bottom: 1px solid #e5e5e5;
+	font-size: 19px;
+}
+.question-article-count:active, .question-article-count:focus {
+	outline: none;
+}
+.question-submit {
+	cursor: pointer;
+	margin-top: 15px;
+	width: 150px;
 }

@@ -34,14 +34,12 @@ class Compare extends React.Component {
 
 		var params = this.state.selectedEntities.join(',')
 		
-		const updateState = function(json) {
-			
-		}
 		fetch(Constant.API_ROOT_URL + '/compare?entities=' + params)
 			.then(function(response) {
 				return response.json()
 			}).then(function(json) {
 				this.setState({comparison: json})
+				this.setState(this.state)
 			}.bind(this))
 	}
 

@@ -20,8 +20,8 @@ class FilterBar extends React.Component {
 					<div style={{float: 'right'}}>
 						<span className="sort-by">Sort articles by </span>
 						<select ref={(input) => this.sortSelect = input} onChange={this.onChange} className="filter-option">
-							<option value={Constant.sortOptions.DATE}>Date</option>
-							<option value={Constant.sortOptions.SENTIMENT}>Sentiment</option>
+							<option value={Constant.sortOptions.DATE}>Date (Most recent)</option>
+							<option value={Constant.sortOptions.SENTIMENT}>Sentiment (Most negative)</option>
 						</select>
 					</div>
 					</div>

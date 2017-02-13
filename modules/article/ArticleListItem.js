@@ -1,11 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router'
+import {ModalContainer, ModalDialog} from 'react-modal-dialog'
 const Constant = require('../constants')
 
 class ArticleListItem extends React.Component {
 	constructor(props) {
 		super(props)
 		this.handleTagClick = this.handleTagClick.bind(this)
+		this.showArticle = this.showArticle.bind(this)
+		this.close = this.close.bind(this)
+		this.state = {
+			showModal: false
+		}
 	}
 
 	formatDate(date) {
@@ -46,6 +52,10 @@ class ArticleListItem extends React.Component {
 		this.props.onClick(entity)
 	}
 
+	showArticle() {
+		this.setState({showModal: true})
+	}
+
 	getSentimentTag(entity) {
 		entity.score = entity.positive_score + entity.negative_score
 		return (
@@ -54,6 +64,10 @@ class ArticleListItem extends React.Component {
 				: (<span key={entity.text} onClick={() => this.handleTagClick(entity.text)} className="badge badge-pill badge-danger">{entity.text[0].toUpperCase() + entity.text.slice(1)}</span>)
 		)
 	}
+
+	close(){
+    	this.setState({ showModal: false });
+    }
 
 	render() {
 		var tags = []
@@ -64,11 +78,20 @@ class ArticleListItem extends React.Component {
 					<div className="article-date">
 						{this.props.article.id ? this.prettyDate(new Date(this.props.article.id).toDateString()) : ''} &bull; {Constant.sentiments[this.props.article.articleSentiment.sentiment]}
 					</div>
-						<h4><Link className="article-title" to={"/article/" + this.props.article.id}>{this.props.article.title}</Link></h4>
+						<h4><div className="article-title" onClick={this.showArticle}>{this.props.article.title}</div></h4>
+						
 				</div>
 				<div className='article-tags'>
-					{tags}
+					{ tags }
 				</div>
+				{ this.state.showModal ? <ModalContainer onClose={this.close}>
+		          	
+		            <ModalDialog className='reading'  onClose={this.close}>
+		              <h1>{this.props.article.title}</h1>
+		              <p>{this.props.article.article}</p>
+		            </ModalDialog>
+		        </ModalContainer>: <div></div>}
+				
 			</div>
 		)
 	}

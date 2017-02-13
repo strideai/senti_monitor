@@ -1,5 +1,4 @@
 import React from 'react'
-import CompareColumn from './CompareColumn'
 const Constant = require('../constants')
 import Entities from '../entity/Entities'
 import update from 'immutability-helper'
@@ -21,62 +20,54 @@ class CompareView extends React.Component {
 		this.handleChangeSelectedEntities = this.handleChangeSelectedEntities.bind(this)
 		this.getRows = this.getRows.bind(this)
 		this.getTable = this.getTable.bind(this)
-		this.getColWidth = this.getColWidth.bind(this)
+		//this.getColWidth = this.getColWidth.bind(this)
 	}
 
 	handleChangeSelectedEntities(entity) {
 		this.props.onClick(entity)
 	}
 
-	getColWidth() {
-		var len = this.props.selectedEntities.slice(0, 3).length
-		return 'col-sm-' + (6 / len) + '  compare-entity-col'
-	}
-
 	getRows() {
 		var result = []
 		comparisonAttrs.forEach((attr) => (
 			result.push(
-				<div>
-				<tr className='meta-row'>
-					<td colSpan={Math.min(this.props.selectedEntities.length, 3)}>{attr.name}</td>
-				</tr>	
-				<tr className=''>
-					{ this.getRow(attr.attr) }
+				<tr>
+					<td>{attr.name}</td>
+					{ this.getRow(attr) }
 				</tr>
-				</div>
 			)
-		))
-		console.log(result)
+		))		
 		return result
 	}
 
 	getRow(attr) {
-		return this.props.comparison.map((e) => (
-			<td>{e[attr]}</td>
+		const result = this.props.comparison.map((e) => (
+			<td>{e[attr.attr]}</td>
 		))
+		return result
 	}
 
 	getTable() {
-		const getHeading = comparisonAttrs.map((attr) => (
-			<th> { attr.name } </th>
-		))
+		//const getEntities = [<th className='compare-entity-name'>g</th>]
 		const getEntities = this.props.selectedEntities.slice(0, 3).map((entity) => (
-			<th className={this.getColWidth() + ' compare-entity-name'}>
+			<th className='compare-entity-name'>
 				{entity[0].toUpperCase() + entity.slice(1)}
 			</th>
 		))
+		getEntities.unshift((<th className='compare-entity-name'></th>))
 		return (
-			<table className='table table-bordered table-striped' style={{display: this.props.selectedEntities ? 'table' : 'none'}}>
-			<thead>
-				<tr>
-					{getEntities}
-				</tr>
-			</thead>
-			<tbody>
-				{this.getRows()}
-			</tbody>
-			</table>
+			<div>
+				<table className='table table-bordered' style={{display: this.props.selectedEntities.length > 0 ? 'table' : 'none'}}>
+				<thead>
+					<tr>
+						{getEntities}
+					</tr>
+				</thead>
+				<tbody>
+					{this.getRows()}
+				</tbody>
+				</table>
+			</div>
 		)
 
 	}

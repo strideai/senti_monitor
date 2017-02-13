@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Router, Route, hashHistory } from 'react-router'
-import App from './modules/App'
+import SuperApp from './modules/SuperApp'
 
-render(<App />, document.getElementById('app'))
+render(<SuperApp />, document.getElementById('app'))
