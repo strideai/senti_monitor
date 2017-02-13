@@ -10,48 +10,26 @@ const comparisonAttrs = [
 	{attr: 'mentionsCount', name: 'Total mentions'}, 
 	{attr: 'positiveRefs', name: 'Positive mentions'},
 	{attr: 'negativeRefs', name: 'Negative mentions'}, 
-	{attr: 'overallAvgScore', name: 'Average sentiment score'}, 
-	{attr: 'recentAvgScore', name: 'Recent sentiment score'}
+	{attr: 'overallAvgScore', name: 'Average sentiment score'}
+	//{attr: 'recentAvgScore', name: 'Recent sentiment score'}
 ]
 
 class CompareView extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = {
-			selectedEntities: [],
-			comparison: []
-		}
 		this.getRow = this.getRow.bind(this)
 		this.handleChangeSelectedEntities = this.handleChangeSelectedEntities.bind(this)
 		this.getRows = this.getRows.bind(this)
 		this.getTable = this.getTable.bind(this)
 		this.getColWidth = this.getColWidth.bind(this)
-		this.selectedIndexOf = this.selectedIndexOf.bind(this)
 	}
 
 	handleChangeSelectedEntities(entity) {
-		var index = this.selectedIndexOf(entity)
-		if (index != -1) {
-			this.setState({selectedEntities: update(this.state.selectedEntities, {$splice: [[index, 1]]})})
-		} else {
-			this.setState({selectedEntities: update(this.state.selectedEntities, {$push: [entity]})})
-		}
-		var params = this.state.selectedEntities
-		
-		console.log(params)
-		const updateState = (json) => this.setState({comparison: json})
-		fetch(Constant.API_ROOT_URL + '/compare?entities=' + params)
-			.then(function(response) {
-				return response.json()
-			}).then(function(json) {
-				updateState(json)
-				console.log('aaa')
-				console.log(this.state.comparison)
-			})
+		this.props.onClick(entity)
 	}
 
 	getColWidth() {
-		var len = this.state.selectedEntities.slice(0, 3).length
+		var len = this.props.selectedEntities.slice(0, 3).length
 		return 'col-sm-' + (6 / len) + '  compare-entity-col'
 	}
 
@@ -61,7 +39,7 @@ class CompareView extends React.Component {
 			result.push(
 				<div>
 				<tr className='meta-row'>
-					<td colSpan={Math.min(this.state.selectedEntities.length, 3)}>{attr.name}</td>
+					<td colSpan={Math.min(this.props.selectedEntities.length, 3)}>{attr.name}</td>
 				</tr>	
 				<tr className=''>
 					{ this.getRow(attr.attr) }
@@ -74,8 +52,7 @@ class CompareView extends React.Component {
 	}
 
 	getRow(attr) {
-		console.log(this.state)
-		return this.state.comparison.map((e) => (
+		return this.props.comparison.map((e) => (
 			<td>{e[attr]}</td>
 		))
 	}
@@ -84,13 +61,13 @@ class CompareView extends React.Component {
 		const getHeading = comparisonAttrs.map((attr) => (
 			<th> { attr.name } </th>
 		))
-		const getEntities = this.state.selectedEntities.slice(0, 3).map((entity) => (
+		const getEntities = this.props.selectedEntities.slice(0, 3).map((entity) => (
 			<th className={this.getColWidth() + ' compare-entity-name'}>
 				{entity[0].toUpperCase() + entity.slice(1)}
 			</th>
 		))
 		return (
-			<table className='table table-bordered table-striped' style={{display: this.state.selectedEntities ? 'table' : 'none'}}>
+			<table className='table table-bordered table-striped' style={{display: this.props.selectedEntities ? 'table' : 'none'}}>
 			<thead>
 				<tr>
 					{getEntities}
@@ -104,15 +81,6 @@ class CompareView extends React.Component {
 
 	}
 
-	selectedIndexOf(entity) {
-		var selected = this.state.selectedEntities
-		for (var i = 0; i < selected.length; i++) {
-			if (selected[i] == entity)
-				return i
-		}
-		return -1
-	}
-
 	render() {
 		return (
 			<div>
@@ -120,7 +88,7 @@ class CompareView extends React.Component {
 				<div className='row'>
 					
 					<div className='col-sm-3'>
-						<Entities topEntities={this.props.topEntities} entities={this.props.entities} selectedIndexOf={this.selectedIndexOf} handleChangeSelectedEntities={this.handleChangeSelectedEntities} selectedEntities={this.state.selectedEntities}/>
+						<Entities topEntities={this.props.topEntities} entities={this.props.entities} selectedIndexOf={this.props.selectedIndexOf} handleChangeSelectedEntities={this.handleChangeSelectedEntities} selectedEntities={this.props.selectedEntities}/>
 					</div>
 					
 					<div className='col-sm-9'>
