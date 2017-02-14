@@ -9,7 +9,7 @@ from urllib2 import Request, urlopen
 from collections import Counter
 
 conn = pymongo.MongoClient('localhost',27017)              # Mongo Stuff
-conn.admin.authenticate('root', 'password')
+# conn.admin.authenticate('root', 'password')
 db = conn.news2
 collection = db.business
 

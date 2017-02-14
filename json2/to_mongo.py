@@ -3,7 +3,7 @@ from collections import Counter
 import subprocess as sp
 
 conn = pymongo.MongoClient('localhost',27017)              # Mongo Stuff
-conn.admin.authenticate('root', 'password')
+# conn.admin.authenticate('root', 'password')
 db = conn.news2
 collection = db.business
 
