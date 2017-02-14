@@ -19,14 +19,14 @@ body {
 }
 
 .navbar {
-	background-color: #fff;
+	background-color: #333;
 	padding: 20px;
 	margin-bottom: 0;
 	z-index: 2;
 	border-bottom: 1px solid #eee;
 }
 .nav-link, .nav-link:hover, .nav-link:active, .nav-link:focus {
-	color: black;
+	color: white;
 }
 .active {
 	color: blue;
@@ -85,11 +85,16 @@ body {
 	padding: 8px;
 	-webkit-transition-duration: 0.3s;
 }
-.entity-list-item:hover, .entity-list-item-selected, .entity-list-right:hover {
-	background: #666;
-	color: white;
+.entity-list-item:hover {
+	background: #EEE;
+	color: black;
 	cursor: pointer;
 }
+ .entity-list-item-selected, .entity-list-item:active, .entity-list-item:focus {
+ 	background: #666;
+ 	color: white;
+ 	cursor: pointer;
+ }
 /*::-webkit-input-placeholder { /* Chrome/Opera/Safari 
   color: white;
 }

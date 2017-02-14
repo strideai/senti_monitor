@@ -20,7 +20,7 @@ class SuperApp extends React.Component {
 			<div className='container-fluid question-container'>
 			<div className='question-children'>
 				<h2 className='question'>How many articles do you want to load?</h2>
-				<input ref={(input) => this.answer = input} type='text' className='question-article-count' placeholder='100' />
+				<input ref={(input) => this.answer = input} type='text' className='question-article-count' placeholder='For eg., 100' />
 				<button onClick={this.handleClick} className='btn btn-primary question-submit' type='submit' required={true}>Load articles</button>
 			</div>
 			</div>
