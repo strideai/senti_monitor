@@ -1,14 +1,14 @@
-<html>
+<html ng-app="Sentiment">
 <head>
 	<meta charset="UTF-8">
 	<!-- <link rel="stylesheet" href="static/css/bootstrap.min.css"> -->
 	<link rel="stylesheet" href="static/css/cosmo-bootstrap.min.css">
 	<link href="static/css/Roboto.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="static/css/home.css" />
-	<!-- <link rel="stylesheet" type="text/css" href="static/css/materialize.min.css" /> -->
+	<link rel="shortcut icon" href="/static/img/favicon.png" type="image/x-icon">
 	<title>Sentiment Monitor</title>
 </head>
-<body>
+<body ng-controller="sentiment_manager">
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -18,42 +18,17 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand pull-left" href="#"><a href="http://stride.ai"><img class="img" src="static/img/nav-logo.png" alt="Stride Logo" width="150"></a></a>
+				<a class="navbar-brand pull-left" href="http://stride.ai"><img class="img" src="static/img/nav-logo.png" alt="Stride Logo" id="logo"></a>
 			</div>
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<!-- <div class="collapse navbar-collapse navbar-ex1-collapse">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Link</a></li>
-					<li><a href="#">Link</a></li>
-				</ul>
-				<form class="navbar-form navbar-left" role="search">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Search">
-					</div>
-					<button type="submit" class="btn btn-default">Submit</button>
-				</form>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">Link</a></li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
-							<li><a href="#">Something else here</a></li>
-							<li><a href="#">Separated link</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div> --><!-- /.navbar-collapse -->
 		</div>
 	</nav>
 
-	<div class="container" id="articleCountCollector">
+	<div class="container" id="articleCountCollector" ng-show="result">
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4">
 				<form id="noOfArticles">
 					<div class="input-group textinput">
-						<input name="articleCount" id="articleCount" type="text">
+						<input name="articleCount" id="articleCount" ng-model="articleCount" type="number" ng-change="textChange()" required autocomplete="off">
 						<label class="control-label" for="articleCount"><span>Number of Articles to fetch?</span></label>
 					</div>
 					<input type="submit" class="btn btn-success center-block form-submit">
@@ -62,21 +37,50 @@
 		</div>
 	</div>
 	
+	<div class="container" id="articlesList" ng-hide="result">
+		
+		<div class="col-md-2 col-md-offset-10">
+			<h4 class="text-right">Article Count: {{! articleCount }}</h4>
+		</div>
+
+		<div class="col-md-2">
+			<div class="row label label-default" ng-repeat="entity in topEntityList | orderBy: 'count' track by $index">{{! entity.name | limitTo: 40}} : {{! entity.count }}</div>
+		</div>
+		
+		<div class="col-md-9 col-md-offset-1">
+			<div class="row" ng-repeat="article in expectedArticleList">
+				<div class="panel" ng-class="{'panel-success': article.articleSentiment.sentiment == 'P' || article.articleSentiment.sentiment == 'VP', 'panel-danger': article.articleSentiment.sentiment == 'Ne' || article.articleSentiment.sentiment == 'VNe', 'panel-primary': article.articleSentiment.sentiment == 'N'}">
+					<div class="panel-heading" ng-click="viewArticle( $index )">{{! article.title }} <span class="pull-right">Sentiment: {{! article.articleSentiment.score }}</span></div>
+					<div class="panel-body">
+						<span class="label" ng-class="{'label-success': entity.category == 'positive', 'label-danger': entity.category == 'negative', 'label-warning': entity.category == 'mixed'}" ng-repeat="entity in article.entities">{{! entity.text}}<br/></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="articleViewer">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="articleTitle"></h4>
+				</div>
+				<div class="modal-body" id="articleBody">
+										
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="static/js/jquery.min.js"></script>
+	<script src="static/js/angular.min.js"></script>
+	<script src="static/js/bootstrap.min.js"></script>
+	<script src="static/js/browser.min.js"></script>
+	<script src="static/js/index.js"></script>
 </body>
-<script src="static/js/jquery.min.js"></script>
-<script src="static/js/angular.min.js"></script>
-<script src="static/js/bootstrap.min.js"></script>
-<script src="static/js/browser.min.js"></script>
-<script>
-	$(".textinput input").change(function() {
-		if ($(this).val() != "") {
-			$(this).addClass('filled');
-		} else {
-			$(this).removeClass('filled');
-		}
-	})
-</script>
-<!-- <script src="static/js/materialize.min.js"></script> -->
-<!-- <script type="text/babel" src="static/js/index.js"></script> -->
 </html>
 

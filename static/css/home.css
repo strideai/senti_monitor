@@ -1,3 +1,14 @@
+#logo{
+	width: 100px;
+	margin-top: -5px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
 #articleCountCollector{
 	margin-top: 150px;
 }
@@ -88,4 +99,33 @@ input[type="submit"]:active {
 }
 .form-submit{
 	margin-top: 20px;
+}
+
+.panel-danger{
+	border-color: #9d0000;
+}
+
+.panel-danger>.panel-heading{
+	color: white;
+	background-color: #c40000;
+	border-color: #9d0000;
+}
+
+.modal-header{
+	color: #fff;
+	background-color: #333;
+}
+
+.modal-footer{
+	color: #fff;
+	background-color: #333;
+}
+
+.label{
+	display: inline-block;
+	margin: 5px;
+}
+
+.label-danger{
+	background-color: #c40000;
 }
