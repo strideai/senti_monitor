@@ -115,6 +115,8 @@ class CompareView extends React.Component {
 						return response.json()
 					}).then(function(json) {
 						var prev = this.state.selectedEntities
+						if ('hello' in json[0])
+							return
 						prev[i] = json[0]
 						console.log(json[0])
 						this.setState({value: ''})
@@ -125,7 +127,15 @@ class CompareView extends React.Component {
 			return (
 				<th valign='center' className='compare-entity-name'>
 				{ this.state.selectedEntities[i] 
-					? (<span onClick={() => this.setState({currentAutoComplete: i})} style={{color: 'white', textAlign: 'center'}}> {this.toTitleCase(this.state.selectedEntities[i].name)} </span>)
+					? (
+						<div>
+							<span onClick={() => this.setState({currentAutoComplete: i})} style={{color: 'white', textAlign: 'center'}}> 
+								{this.toTitleCase(this.state.selectedEntities[i].name)} 
+							</span>
+							<span onClick={() => {var t = this.state.selectedEntities; t[i] = undefined; this.forceUpdate()}} style={{cursor: 'pointer', marginLeft: '3px', color: 'white', textDecoration: 'underline', fontSize: '12px'}}>
+								(Change)
+							</span>
+						</div>)
 					: 
 						(this.state.currentAutoComplete == i
 							? (<Autosuggest
@@ -170,7 +180,7 @@ class CompareView extends React.Component {
 			<div>
 				<div className='container-fluid' style={{'marginTop': '14px'}}>
 				<div className='row'>
-					<h3 style={{marginLeft: '25px'}}>Compare entities</h3>
+					<h5 style={{marginLeft: '25px', color: 'blue'}}>Add entities to get started</h5>
 					<div className='col-sm-12'>
 						{ this.getTable() }
 					</div>
