@@ -82,7 +82,7 @@ class CompareView extends React.Component {
 		  const inputValue = value.trim().toLowerCase()
 		  const inputLength = inputValue.length
 
-		  return this.props.entities.filter(e =>
+		  return inputLength === 0 ? [] : this.props.entities.filter(e =>
 		    e.toLowerCase().slice(0, inputLength) === inputValue
 		  ).map((e) => this.toTitleCase(e))
 	}
@@ -108,7 +108,7 @@ class CompareView extends React.Component {
 
 			const onSuggestionSelected = (s, event) => {
 				var entity = s.target.innerHTML
-				console.log(entity.innerHTML)
+				console.log(entity)
 				this.onSuggestionsClearRequested()
 				fetch(Constant.API_ROOT_URL + '/compare?entities=' + entity)
 					.then(function(response) {
@@ -145,7 +145,6 @@ class CompareView extends React.Component {
 						        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
 						        getSuggestionValue={getSuggestionValue}
 						        renderSuggestion={renderSuggestion}
-						        alwaysRenderSuggestions={true}
 						        onSuggestionSelected={onSuggestionSelected}
 						        inputProps={inputProps}
 							/>)
