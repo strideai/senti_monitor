@@ -103,12 +103,12 @@ class CompareView extends React.Component {
 				onChange: this.onChange,
 				className: 'compare-head-input',
 				autoFocus: true,
-				onFocus: () => { this.setState({currentAutoComplete: i}); alert(i); }
+				onFocus: () => { this.setState({currentAutoComplete: i}); }
 			}
 
 			const onSuggestionSelected = (s, event) => {
 				var entity = s.target.innerHTML
-				console.log(entity.innerHTML)
+				console.log(entity)
 				this.onSuggestionsClearRequested()
 				fetch(Constant.API_ROOT_URL + '/compare?entities=' + entity)
 					.then(function(response) {
