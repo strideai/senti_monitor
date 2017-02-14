@@ -82,7 +82,7 @@ class CompareView extends React.Component {
 		  const inputValue = value.trim().toLowerCase()
 		  const inputLength = inputValue.length
 
-		  return inputLength === 0 ? [] : this.props.entities.filter(e =>
+		  return this.props.entities.filter(e =>
 		    e.toLowerCase().slice(0, inputLength) === inputValue
 		  ).map((e) => this.toTitleCase(e))
 	}
@@ -103,7 +103,7 @@ class CompareView extends React.Component {
 				onChange: this.onChange,
 				className: 'compare-head-input',
 				autoFocus: true,
-				onFocus: () => { this.setState({currentAutoComplete: i}); alert(i); }
+				onFocus: () => { this.setState({currentAutoComplete: i}); }
 			}
 
 			const onSuggestionSelected = (s, event) => {
@@ -145,6 +145,7 @@ class CompareView extends React.Component {
 						        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
 						        getSuggestionValue={getSuggestionValue}
 						        renderSuggestion={renderSuggestion}
+						        alwaysRenderSuggestions={true}
 						        onSuggestionSelected={onSuggestionSelected}
 						        inputProps={inputProps}
 							/>)
