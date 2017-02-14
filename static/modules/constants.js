@@ -28,5 +28,5 @@ module.exports = {
 		GTE: 4,
 		NE: 5
 	},
-	API_ROOT_URL: 'http://54.175.46.132:8000'
+	API_ROOT_URL: 'https://aef0ce53.ngrok.io'
 }
