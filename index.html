@@ -44,15 +44,15 @@
 		</div>
 
 		<div class="col-md-2">
-			<div class="row label label-default" ng-repeat="entity in topEntityList | orderBy: 'count' track by $index">{{! entity.name | limitTo: 40}} : {{! entity.count }}</div>
+			<div class="label label-default center-block" ng-repeat="entity in topEntityList | orderBy: '-count' | limitTo: 20 track by $index"><h6>{{! entity.name | limitTo: 30 | uppercase}} : {{! entity.count }}</h6></div>
 		</div>
 		
 		<div class="col-md-9 col-md-offset-1">
 			<div class="row" ng-repeat="article in expectedArticleList">
 				<div class="panel" ng-class="{'panel-success': article.articleSentiment.sentiment == 'P' || article.articleSentiment.sentiment == 'VP', 'panel-danger': article.articleSentiment.sentiment == 'Ne' || article.articleSentiment.sentiment == 'VNe', 'panel-primary': article.articleSentiment.sentiment == 'N'}">
-					<div class="panel-heading" ng-click="viewArticle( $index )">{{! article.title }} <span class="pull-right">Sentiment: {{! article.articleSentiment.score }}</span></div>
+					<div class="panel-heading" ng-click="viewArticle( $index )"><h4>{{! article.title }} <span class="pull-right">Sentiment: {{! article.articleSentiment.score }}</h4></span></div>
 					<div class="panel-body">
-						<span class="label" ng-class="{'label-success': entity.category == 'positive', 'label-danger': entity.category == 'negative', 'label-warning': entity.category == 'mixed'}" ng-repeat="entity in article.entities">{{! entity.text}}<br/></span>
+						<span class="label" ng-class="{'label-success': entity.category == 'positive', 'label-danger': entity.category == 'negative', 'label-warning': entity.category == 'mixed'}" ng-repeat="entity in article.entities">{{! entity.text | uppercase}}<br/></span>
 					</div>
 				</div>
 			</div>
