@@ -9,7 +9,7 @@ from urllib2 import Request, urlopen
 from collections import Counter
 
 conn = pymongo.MongoClient('localhost',27017)              # Mongo Stuff
-conn.admin.authenticate('root', 'themenwhopause')
+conn.admin.authenticate('root', 'password')
 db = conn.news2
 collection = db.business
 
@@ -17,11 +17,21 @@ collection = db.business
 def get_entity(entity,time):
 	try:
 		entity = entity.lower()
-		with open('json2/all_counts') as f:
-			total_count = eval(f.read())	
+		with open('json2/total_counter') as f:
+			total_counter = eval(f.read())			
+		with open('json2/pos_counter') as f:
+			pos_counter = eval(f.read())	
+		with open('json2/neg_counter') as f:
+			neg_counter = eval(f.read())	
+		with open('json2/mixed_counter') as f:
+			mixed_counter = eval(f.read())	
 
 		cursor = collection.find()
 		cursor = collection.aggregate([{"$match":{"entities":entity}}])
+
+		#article_freq_entity  = collection.aggregate([{"$match":{"entities":entity}}, {"$group":{"_id":"null","count":{"$sum":1}}}])
+		#GIVES YOU THE TOTAL NO OF ARTICLES WHERE THIS ENTITY IS FOUND
+		#article_freq_entity = total_entity_count.next()['count']  #NOT required here
 
 		jl = []
 		while cursor.alive ==True:
@@ -32,6 +42,8 @@ def get_entity(entity,time):
 			jl = [k for k in jl if k['Timestamp'] > time]
 			print len(jl)
 
+
+		""" These give you the no of articles which are pos or neg where entity has been mentioned, not required; But serve as dummy(highly unlikely)"""		
 		pos = 0
 		neg = 0
 		for i in range(len(jl)):
@@ -49,7 +61,11 @@ def get_entity(entity,time):
 					score = score + j['positive_score'] + j['negative_score']
 		avg = round(score / len(jl),2)
 							
-		data = {"name":entity,"mentionsCount":total_count[entity],"positiveRefs":pos,"negativeRefs":neg,"overallAvgScore":avg}	
+		try:
+			data = {"name":entity,"mentionsCount":total_counter[entity],"positiveRefs":pos_counter[entity],"negativeRefs":neg_counter[entity],"overallAvgScore":avg,"mixedRefs":mixed_counter[entity]}	
+		except:	
+			data = {"name":entity,"mentionsCount":len(jl),"positiveRefs":pos,"negativeRefs":neg,"overallAvgScore":avg}	
+
 		return data
 	except:
 		return {"hello":"error"}
@@ -99,14 +115,25 @@ class feed(pyrestful.rest.RestHandler):
 			for i in range(offset,offset+limit+1):
 				val = cursor.next()
 				val.pop('_id')
-				val.pop('article')
-				val.pop('posneg')
-				val.pop('entity_count')
+				#val.pop('article')
+				#val.pop('posneg')
+				#val.pop('entity_count')
 
 				val['id'] = val.pop('Timestamp')
 				val['articleSentiment'] = val.pop('Doc_sentiment')
 				val['entities'] = val.pop('entity_sentiment')
 
+				
+				kk = val['entities']
+				for m in range(len(kk)):
+					for n in range(len(val['posneg'])):
+						try:
+							kk[m]['count'] = val['posneg'][n] [kk[m]['text']] ['positive_count'] + val['posneg'][n][ kk[m]['text']]['negative_count']
+						except:
+							#kk[m]['count'] = 0
+							continue
+							
+				val.pop('posneg')
 				json_list.append(val)
 			print 'No of articles',len(json_list)
 			print 'Done'
@@ -116,15 +143,15 @@ class feed(pyrestful.rest.RestHandler):
 			return {"Hello":"error"}
 
 define("debug", default=False, help="run in debug mode")
-define("port", default=8088, help="run server on given port", type=int)
+define("port", default=8000, help="run server on given port", type=int)
 parse_command_line()
 
 if __name__ == '__main__':
 	try:
 		print("Running on 8000")
 		app = pyrestful.rest.RestService([feed],debug=True,static_path=os.path.join(os.path.dirname(__file__), "static"))
-		app.listen(8088)
-		logging.info("Server running on port %d", 8088)
+		app.listen(8000)
+		logging.info("Server running on port %d", 8000)
 		tornado.ioloop.IOLoop.instance().start()        
 	except KeyboardInterrupt:
 		print("\nStop the echo service")
