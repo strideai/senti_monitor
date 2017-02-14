@@ -11,10 +11,15 @@
   "dependencies": {
     "fetch": "^1.1.0",
     "immutability-helper": "^2.1.1",
+    "net": "^1.0.2",
     "react": "^0.14.8",
     "react-dom": "^0.14.7",
+    "react-fetch": "0.0.9",
+    "react-modal": "^1.6.5",
     "react-router": "^2.0.0",
-    "react-text-filter": "^2.1.0"
+    "react-text-filter": "^2.1.0",
+    "webpack-dev-server": "^1.16.3",
+    "whatwg-fetch": "^2.0.2"
   },
   "devDependencies": {
     "babel-core": "^6.5.1",
