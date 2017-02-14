@@ -16,23 +16,13 @@ class EntityList extends React.Component {
 
 		var entities = allEntities //this.props.filter == '' && selectedEntities.length == 0 ? topEntities : Array.from(new Set(topEntities.concat(allEntities)))
 
-		const getEntityList = entities => entities.sort().map(
+		const getEntityList = entities => entities.map(
 			(e) => <EntityListItem key={e} entity={e} selected={this.props.selectedIndexOf(e) != -1} onClick={handleClick} />
 		)
 
 		var filtered = entities.filter(
 			(e) => e.toLowerCase().trim().indexOf(this.props.filter.toLowerCase().trim()) != -1
-		).sort(function(a, b) {
-			if (topEntities.indexOf(a) != -1)
-				return 1
-			if (topEntities.indexOf(b) != -1)
-				return -1
-			if (selectedIndexOf(a) != -1 && selectedIndexOf(b) == -1)
-				return -1
-			else if (selectedIndexOf(b) != -1 && selectedIndexOf(a) == -1)
-				return 1
-			return a.localeCompare(b)
-		})
+		)
 
 		return (
 			<div className='entity-list'>

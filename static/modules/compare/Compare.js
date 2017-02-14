@@ -34,14 +34,12 @@ class Compare extends React.Component {
 
 		var params = this.state.selectedEntities.join(',')
 		
-		const updateState = function(json) {
-			
-		}
 		fetch(Constant.API_ROOT_URL + '/compare?entities=' + params)
 			.then(function(response) {
 				return response.json()
 			}).then(function(json) {
 				this.setState({comparison: json})
+				this.setState(this.state)
 			}.bind(this))
 	}
 
@@ -50,7 +48,7 @@ class Compare extends React.Component {
 	render() {
 		return (
 			<div>
-				<CompareView selectedIndexOf={this.selectedIndexOf} topEntities={this.props.topEntities} entities={this.props.entities} selectedEntities={this.state.selectedEntities} comparison={this.state.comparison.slice(0, 3)} onClick={this.handleClick} />
+				<CompareView entities={this.props.entities} selectedEntities={this.state.selectedEntities} comparison={this.state.comparison.slice(0, 3)} onClick={this.handleClick} />
 			</div>
 		)
 	}

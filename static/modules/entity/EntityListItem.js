@@ -15,10 +15,14 @@ class EntityListItem extends React.Component {
 		return this.props.selected ? 'entity-list-right entity-list-item entity-list-item-selected' : 'entity-list-right entity-list-item'
 	}
 
+	toTitleCase(str) {
+	    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+	}
+
 	render() {
 		return (
 			<div ref={(li) => this.entityListItem = li} onClick={this.handleClick} className={this.getClassName()}>
-				{this.props.entity[0].toUpperCase() + this.props.entity.slice(1)}
+				{this.toTitleCase(this.props.entity)}
 			</div>
 		)
 	}
