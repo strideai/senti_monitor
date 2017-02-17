@@ -129,3 +129,8 @@ input[type="submit"]:active {
 .label-danger{
 	background-color: #c40000;
 }
+
+.label-default{
+	background-color: #777;
+	vertical-align: middle;
+}

@@ -2,7 +2,7 @@ var app = angular.module('Sentiment', []);
 
 app.controller('sentiment_manager', ['$scope', '$http', function($scope, $http){
 	
-	$scope.expectedArticleList = [], $scope.order = 'null', $scope.topEntityList = [], $scope.result = true;
+	$scope.expectedArticleList = [], $scope.order = 'null', $scope.topEntityList = [], $scope.result = true, $scope.entityFilter = '';
 
 	$scope.textChange = () => {
 		if ($('#articleCount').val() != "") {
@@ -49,11 +49,31 @@ app.controller('sentiment_manager', ['$scope', '$http', function($scope, $http){
 			$scope.result = false;
 			$scope.expectedArticleList = resp.data;
 			$scope.topEntityList = topEntityFinder($scope.expectedArticleList);
-			console.log($scope.topEntityList);
 		}, 
 		(e)=> {
 			console.error(e)
 		})
 	});
 
+	$scope.getSentiment = (senti) => {
+	    switch (senti) {
+	        case 'N':
+	        return 'Neutral';
+	        case 'Ne':
+	        return 'Negative';
+	        case 'VNe':
+	        return 'Very Negative';
+	        case 'P':
+	        return 'Positive';
+	        case 'VP':
+	        return 'Very Positive';
+	        default:
+	        return 'Neutral';
+	    };
+	};
+
+	$scope.entityFilterChange = (entity) => {
+		$scope.entityFilter += ' ' + entity;
+		console.log($scope.entityFilter);
+	};
 }])

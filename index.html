@@ -40,19 +40,30 @@
 	<div class="container" id="articlesList" ng-hide="result">
 		
 		<div class="col-md-2 col-md-offset-10">
-			<h4 class="text-right">Article Count: {{! articleCount }}</h4>
+			<h4 class="text-right">Article Count: {{! filteredExpectedArticleList.length }}</h4>
 		</div>
 
-		<div class="col-md-2">
-			<div class="label label-default center-block" ng-repeat="entity in topEntityList | orderBy: '-count' | limitTo: 20 track by $index"><h6>{{! entity.name | limitTo: 30 | uppercase}} : {{! entity.count }}</h6></div>
+		<div class="col-md-3">
+			<div class="input-group textinput">
+				<input name="entitySearch" id="entitySearch" ng-model="entitySearch" type="text" ng-change="textChange()" required autocomplete="off">
+				<label class="control-label" for="entitySearch"><span>Entity Search</span></label>
+			</div>
+			<div class="row center-block" ng-repeat="entity in topEntityList | orderBy: '-count' | limitTo: 20 track by $index">
+				<div class="label label-default" ng-click="entityFilterChange( entity.name.toLowerCase() )">
+					<h6>{{! entity.name | limitTo: 30 | uppercase | filter: entitySearch }} : {{! entity.count }}</h6>
+				</div>
+			</div>
 		</div>
 		
-		<div class="col-md-9 col-md-offset-1">
-			<div class="row" ng-repeat="article in expectedArticleList">
+		<div class="col-md-9">
+			<div class="row" ng-repeat="article in filteredExpectedArticleList = (expectedArticleList | filter: entityFilter) ">
 				<div class="panel" ng-class="{'panel-success': article.articleSentiment.sentiment == 'P' || article.articleSentiment.sentiment == 'VP', 'panel-danger': article.articleSentiment.sentiment == 'Ne' || article.articleSentiment.sentiment == 'VNe', 'panel-primary': article.articleSentiment.sentiment == 'N'}">
-					<div class="panel-heading" ng-click="viewArticle( $index )"><h4>{{! article.title }} <span class="pull-right">Sentiment: {{! article.articleSentiment.score }}</h4></span></div>
+					<div class="panel-heading" ng-click="viewArticle( $index )"><h4>{{! article.title }} </h4></div>
 					<div class="panel-body">
 						<span class="label" ng-class="{'label-success': entity.category == 'positive', 'label-danger': entity.category == 'negative', 'label-warning': entity.category == 'mixed'}" ng-repeat="entity in article.entities">{{! entity.text | uppercase}}<br/></span>
+					</div>
+					<div class="panel-footer">
+						<p><b>Sentiment Score:</b> {{! article.articleSentiment.score }}<span class="pull-right"><b>Sentiment:</b> {{! getSentiment(article.articleSentiment.sentiment) }}</span></p>
 					</div>
 				</div>
 			</div>
@@ -67,7 +78,7 @@
 					<h4 class="modal-title" id="articleTitle"></h4>
 				</div>
 				<div class="modal-body" id="articleBody">
-										
+
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
