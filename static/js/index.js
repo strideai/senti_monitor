@@ -41,7 +41,7 @@ app.controller('sentiment_manager', ['$scope', '$http', function($scope, $http, 
 
 	angular.element('#articleCountCollector').on('submit', (e) => {
 		e.preventDefault();
-		$('#articleCountCollector').fadeOut();
+		$('#articleCountCollector').hide();
 		$('#loading').removeClass('hidden');
 		$http({
 			method: 'GET',
@@ -113,7 +113,7 @@ app.controller('comparison_manager', ['$scope', '$http', function($scope, $http,
 
 	angular.element('#articleCountCollector').on('submit', (e) => {
 		e.preventDefault();
-		$('#articleCountCollector').fadeOut();
+		$('#articleCountCollector').hide();
 		$('#loading').removeClass('hidden');
 		$http({
 			method: 'GET',
