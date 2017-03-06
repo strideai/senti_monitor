@@ -77,6 +77,10 @@ class feed(pyrestful.rest.RestHandler):
 	def hello(self):
 		self.render('index.html')
 
+	@get(_path="/comparison")
+	def comparison(self):
+		self.render('compare.html')
+
 	@get(_path="/compare", _produces=mediatypes.APPLICATION_JSON)
 	def compare(self, name):
 		entity_list = self.get_argument("entities").split(',')

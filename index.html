@@ -44,10 +44,10 @@
 		</div>
 
 		<div class="col-md-3">
-			<div class="input-group textinput">
+			<!-- <div class="input-group textinput">
 				<input name="entitySearch" id="entitySearch" ng-model="entitySearch" type="text" ng-change="textChange()" required autocomplete="off">
 				<label class="control-label" for="entitySearch"><span>Entity Search</span></label>
-			</div>
+			</div> -->
 			<div class="row center-block" ng-repeat="entity in topEntityList | orderBy: '-count' | limitTo: 20 track by $index">
 				<div class="label label-default" ng-click="entityFilterChange( entity.name.toLowerCase() )">
 					<h6>{{! entity.name | limitTo: 30 | uppercase | filter: entitySearch }} : {{! entity.count }}</h6>

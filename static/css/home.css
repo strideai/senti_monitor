@@ -134,3 +134,11 @@ input[type="submit"]:active {
 	background-color: #777;
 	vertical-align: middle;
 }
+
+.mgtp75{
+	margin-top: 75px;
+}
+
+#entityFinder{
+	box-shadow: none;
+}
