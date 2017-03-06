@@ -385,3 +385,7 @@ app.controller('comparison_manager', ['$scope', '$http', function($scope, $http,
         }
     };
 });
+
+$(document).ready(function() {
+	$('html').css('display', 'block');	
+});
