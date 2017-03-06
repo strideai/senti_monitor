@@ -147,15 +147,15 @@ class feed(pyrestful.rest.RestHandler):
 			return {"Hello":"error"}
 
 define("debug", default=False, help="run in debug mode")
-define("port", default=8000, help="run server on given port", type=int)
+define("port", default=80, help="run server on given port", type=int)
 parse_command_line()
 
 if __name__ == '__main__':
 	try:
-		print("Running on 8000")
+		print("Running on 80")
 		app = pyrestful.rest.RestService([feed],debug=True,static_path=os.path.join(os.path.dirname(__file__), "static"))
-		app.listen(8000)
-		logging.info("Server running on port %d", 8000)
+		app.listen(80)
+		logging.info("Server running on port %d", 80)
 		tornado.ioloop.IOLoop.instance().start()        
 	except KeyboardInterrupt:
 		print("\nStop the echo service")

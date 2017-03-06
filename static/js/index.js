@@ -41,11 +41,14 @@ app.controller('sentiment_manager', ['$scope', '$http', function($scope, $http, 
 
 	angular.element('#articleCountCollector').on('submit', (e) => {
 		e.preventDefault();
+		$('#articleCountCollector').fadeOut();
+		$('#loading').removeClass('hidden');
 		$http({
 			method: 'GET',
 			url: '/feed?offset=0&limit='+ ($scope.articleCount-1),
 		})
 		.then((resp)=> {
+			$('#loading').addClass('hidden');
 			$scope.result = false;
 			$scope.expectedArticleList = resp.data;
 			$scope.topEntityList = topEntityFinder($scope.expectedArticleList);
@@ -110,11 +113,14 @@ app.controller('comparison_manager', ['$scope', '$http', function($scope, $http,
 
 	angular.element('#articleCountCollector').on('submit', (e) => {
 		e.preventDefault();
+		$('#articleCountCollector').fadeOut();
+		$('#loading').removeClass('hidden');
 		$http({
 			method: 'GET',
 			url: '/feed?offset=0&limit='+ ($scope.articleCount-1),
 		})
 		.then((resp)=> {
+			$('#loading').addClass('hidden');
 			$scope.result = false;
 			$scope.expectedArticleList = resp.data;
 			$scope.topEntityList = topEntityFinder($scope.expectedArticleList);

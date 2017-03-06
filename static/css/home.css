@@ -142,3 +142,12 @@ input[type="submit"]:active {
 #entityFinder{
 	box-shadow: none;
 }
+
+.loadinggif {
+    margin-top: 100%;
+    align-self: center;
+}
+
+.loadingtext {
+    align-self: center;
+}
