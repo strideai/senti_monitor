@@ -1,0 +1,153 @@
+#logo{
+	width: 100px;
+	margin-top: -5px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+#articleCountCollector{
+	margin-top: 150px;
+}
+
+:focus {
+    outline: -webkit-focus-ring-color auto 5px;
+    outline-color: transparent;
+    outline-style: auto;
+    outline-width: 0px;
+}
+.textinput {
+	height: 3em;
+	margin: 1em 0;
+	position: relative;
+	width: 100%;
+}
+.textinput input,
+.textinput label {
+	cursor: text;
+	font-size: 1.5em;
+	padding: 0.6em 1% 0.15em 1%;
+	position: absolute;
+	transition: all 0.15s ease;
+	width: 98%;
+}
+
+.textinput input {
+	border:  0;
+	border-bottom: solid black 1px;
+}
+
+.textinput label {
+	color: #3C3938;
+	padding: 0.5em 1%;
+}
+.textinput input.filled ~ label,
+.textinput input:focus ~ label {
+	font-size: 0.6em;
+	font-weight: 600;
+	position: absolute;
+}
+
+.textinput input.filled ~ label {
+	color: #001122;
+}
+
+.textinput input[type="text"].filled,
+.textinput input[type="email"].filled:valid {
+	outline: none;
+	background: #B8DB9B;
+}
+
+.textinput input[type="text"].filled ~label:after,
+.textinput input[type="email"].filled:valid ~label:after {
+	color: #007932;
+	display: inline-block;
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: 3em;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	position: absolute;
+	top: 0.3em;
+	right: 0.3em;
+	transform: translate(0, 0);
+}
+
+input[type="submit"] {
+	/* background: #F37043; */
+	border: solid #52da1d;
+	/* border-radius: 0.15em; */
+	border-width: 0 0 0.15em;
+	color: white;
+	cursor: pointer;
+	font-size: 1.6em;
+	padding: 0.2em 0.4em;
+	transition: all 0.15s ease;
+}
+
+input[type="submit"]:hover {
+	border-width: 0 0 0.1em;
+	margin-top: 0.05em;
+}
+
+input[type="submit"]:active {
+	border-width: 0 0 0em;
+	margin-top: 0.15em;
+}
+.form-submit{
+	margin-top: 20px;
+}
+
+.panel-danger{
+	border-color: #9d0000;
+}
+
+.panel-danger>.panel-heading{
+	color: white;
+	background-color: #c40000;
+	border-color: #9d0000;
+}
+
+.modal-header{
+	color: #fff;
+	background-color: #333;
+}
+
+.modal-footer{
+	color: #fff;
+	background-color: #333;
+}
+
+.label{
+	display: inline-block;
+	margin: 5px;
+}
+
+.label-danger{
+	background-color: #c40000;
+}
+
+.label-default{
+	background-color: #777;
+	vertical-align: middle;
+}
+
+.mgtp75{
+	margin-top: 75px;
+}
+
+#entityFinder{
+	box-shadow: none;
+}
+
+.loadinggif {
+    margin-top: 100%;
+    align-self: center;
+}
+
+.loadingtext {
+    align-self: center;
+}

@@ -1,0 +1,80 @@
+<html ng-app="Sentiment" style="display: none;">
+<head>
+	<meta charset="UTF-8">
+	<!-- <link rel="stylesheet" href="static/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" href="static/css/cosmo-bootstrap.min.css">
+	<link href="static/css/Roboto.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="static/css/home.css" />
+	<link rel="shortcut icon" href="/static/img/favicon.png" type="image/x-icon">
+	<title>Sentiment Monitor</title>
+</head>
+<body ng-controller="comparison_manager">
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand pull-left" href="http://stride.ai"><img class="img" src="static/img/nav-logo.png" alt="Stride Logo" id="logo"></a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container hidden" id="loading">
+        <div class="col-md-2 col-md-offset-5">
+            <img src="static/img/loading.gif" alt="Loading Stride Logo" class="img loadinggif" width="100">
+            <h3 class="loadingtext">Loading...</h3>
+        </div>
+    </div>
+
+	<div class="container" id="articleCountCollector" ng-show="result">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<form id="noOfArticles">
+					<div class="input-group textinput">
+						<input name="articleCount" id="articleCount" ng-model="articleCount" type="number" ng-change="textChange()" required autocomplete="off">
+						<label class="control-label" for="articleCount"><span>Number of Articles to fetch?</span></label>
+					</div>
+					<input type="submit" class="btn btn-success center-block form-submit">
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="container" id="compareList" ng-hide="result">
+		<div class="input-group textinput">
+			<angucomplete id="entityFinder" placeholder="Search Entities" selectedobject="compareEntities" localdata="topEntityList" searchfields="name" titlefield="name" minlength="1" inputclass="form-control" />
+			<label class="control-label" for="entityFinder"><span>Add Entities to compare</span></label>
+		</div>
+		<button class="btn btn-primary" ng-click="addEntity()">Submit</button>
+
+		<div class="row mgtp75">
+			<div class="col-md-{{! 12/(compareResult.length+1) }} text-center" ng-show="compareResult.length>0">
+				<h3>Company Name</h3>
+				<h5>Average Sentiment Score</h5>
+				<h5>Number of Negative References</h5>
+				<h5>Number of Mixed References</h5>
+				<h5>Number of Positive References</h5>
+				<h5>Total Mention</h5>
+			</div>
+			<div class="col-md-{{! 12/(compareResult.length+1) }} text-center" ng-repeat="data in compareResult">
+				<h3>{{! data.name | uppercase}}</h3>
+				<h5>{{! data.overallAvgScore }}</h5>
+				<h5>{{! data.negativeRefs }}</h5>
+				<h5>{{! data.mixedRefs }}</h5>
+				<h5>{{! data.positiveRefs }}</h5>
+				<h5>{{! data.mentionsCount }}</h5>
+			</div>
+		</div>
+	</div>
+
+	<script src="static/js/jquery.min.js"></script>
+	<script src="static/js/angular.min.js"></script>
+	<script src="static/js/bootstrap.min.js"></script>
+	<script src="static/js/browser.min.js"></script>
+	<script src="static/js/index.js"></script>
+</body>
+</html>
